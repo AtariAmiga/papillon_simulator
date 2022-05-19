@@ -2,45 +2,46 @@
 
 #include "NEW.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
+// todo: replace linked list by static array
 struct List* List_new() {
     struct List* i = NEW(List);
     i->head = NULL;
-    i->current = NULL;
     return i;
 }
 
-void List_printf(struct List* this) {
-    struct ListNode* ptr = this->head;
+void List_printf(struct List* this, char* printer() ) {
+    struct ListNode* p = this->head;
     printf("\n[ ");
 
-    while( ptr != NULL ) {
-        printf("(%d, %d) ", ptr->key, ptr->data);
-        ptr = ptr->next;
+    while(p != NULL ) {
+        printf("%s", (*printer)(p->data));
+        p = p->next;
     }
 
     printf(" ]");
 }
 
-void List_insertFirst(struct List* this, int key, int data) {
+void List_insertFirst(struct List* this, void* data) {
     struct ListNode *link = NEW(ListNode);
 
-    link->key = key;
     link->data = data;
 
     link->next = this->head;
     this->head = link;
 }
 
-struct ListNode* List_removeFirst(struct List* this) {
+void* List_removeFirst(struct List* this) {
     struct ListNode *first = this->head;
 
     this->head = this->head->next;
+    void* data = first->data;
 
-    return first;
+    free(first);
+
+    return data;
 }
 
 bool List_isEmpty(struct List* this) {
@@ -55,46 +56,4 @@ int List_length(struct List* this) {
         length++;
 
     return length;
-}
-
-struct ListNode* List_find(struct List* this, int key) {
-    if( this->head == NULL)
-        return NULL;
-
-    struct ListNode* current = this->head;
-
-    while( current->key != key ) {
-        if( current->next == NULL) {
-            return NULL;
-        } else {
-            current = current->next;
-        }
-    }
-
-    return current;
-}
-
-struct ListNode* List_remove(struct List* this, int key) {
-    if( this->head == NULL)
-        return NULL;
-
-    struct ListNode* current = this->head;
-    struct ListNode* previous = NULL;
-
-    while( current->key != key ) {
-        if( current->next == NULL) {
-            return NULL;
-        } else {
-            previous = current;
-            current = current->next;
-        }
-    }
-
-    if( current == this->head) {
-        this->head = this->head->next;
-    } else {
-        previous->next = current->next;
-    }
-
-    return current;
 }
