@@ -1,22 +1,22 @@
 #include "NEW.h"
 
-#include "Emitter.h"
+#include "Terminal.h"
 #include "World.h"
 #include "Message.h"
 
-struct Emitter* Emitter_new(char *name, struct World* owner) {
-    struct Emitter* i = NEW(Emitter);
+struct Terminal* Terminal_new(char *name, struct World* owner) {
+    struct Terminal* i = NEW(Terminal);
     i->name = name;
     i->owner = owner;
     return i;
 }
 
-void Emitter_println(struct Emitter* this) {
+void Terminal_println(struct Terminal* this) {
     assert(this != NULL);
-    printf("Emitter '%s'\n", this->name);
+    printf("Terminal '%s'\n", this->name);
 }
 
-void Emitter_send_message(struct Emitter* this, const char* text, struct Emitter* recipient) {
+void Terminal_send_message(struct Terminal* this, const char* text, struct Terminal* recipient) {
     assert(this != NULL);
     assert(text != NULL);
     assert(recipient != NULL);

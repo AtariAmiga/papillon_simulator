@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 17)
 add_executable(papillon_simulator main.c)
 
 add_library(papillon
-        Emitter.h Emitter.c
+        Terminal.h Terminal.c
         World.h World.c
         List.h List.c
         Message.h Message.c

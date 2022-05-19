@@ -2,7 +2,7 @@
 
 #include "World.h"
 #include "Message.h"
-#include "Emitter.h"
+#include "Terminal.h"
 
 struct World* World_new(char* name) {
     struct World* this = NEW(World);
@@ -14,8 +14,8 @@ struct World* World_new(char* name) {
     return this;
 }
 
-struct Emitter* World_newEmitter(struct World* this, char* name) {
-    struct Emitter* emitter = Emitter_new(name, this);
+struct Terminal* World_newTerminal(struct World* this, char* name) {
+    struct Terminal* emitter = Terminal_new(name, this);
     List_insertFirst(this->emitterList, emitter);
     return emitter;
 }
@@ -31,8 +31,8 @@ void World_runOneStep(struct World* this) {
 
         struct ListNode* node = this->emitterList->head;
         while( node != NULL ) {
-            Emitter_println((struct Emitter*) node->data);
-            if( message->recipient == (struct Emitter*) node->data ) {
+            Terminal_println((struct Terminal*) node->data);
+            if( message->recipient == (struct Terminal*) node->data ) {
                 printf("transferring message\n");
             }
             node = node->next;

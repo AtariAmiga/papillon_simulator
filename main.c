@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "Emitter.h"
+#include "Terminal.h"
 #include "World.h"
 
 int main() {
@@ -8,11 +8,11 @@ int main() {
 
     struct World* w = World_new("The world");
 
-    struct Emitter* v = World_newEmitter(w, "Vincent");
-    struct Emitter* a = World_newEmitter(w, "Antoine");
+    struct Terminal* v = World_newTerminal(w, "Vincent");
+    struct Terminal* a = World_newTerminal(w, "Antoine");
 
-    Emitter_send_message(v, "Hello Antoine", a);
-    Emitter_send_message(a, "Hello Vincent", v);
+    Terminal_send_message(v, "Hello Antoine", a);
+    Terminal_send_message(a, "Hello Vincent", v);
 
     World_runOneStep(w);
 

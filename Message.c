@@ -1,8 +1,8 @@
 #include "NEW.h"
 #include "Message.h"
-#include "Emitter.h"
+#include "Terminal.h"
 
-struct Message* Message_new(struct Emitter* emitter, const char* text, struct Emitter* recipient) {
+struct Message* Message_new(struct Terminal* emitter, const char* text, struct Terminal* recipient) {
     struct Message* this = NEW(Message);
 
     this->emitter = emitter;
