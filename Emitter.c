@@ -1,17 +1,14 @@
-#include <assert.h>
-#include <stddef.h>
-#include <stdio.h>
 #include "NEW.h"
 
 #include "Emitter.h"
 
 struct Emitter* Emitter_new(char* name) {
-    struct Emitter* e = NEW(Emitter);
-    e->name = name;
-    return e;
+    struct Emitter* i = NEW(Emitter);
+    i->name = name;
+    return i;
 }
 
-void Emitter_print(struct Emitter* this) {
+void Emitter_println(struct Emitter* this) {
     assert(this != NULL);
-    printf("Emitter '%s'", this->name);
+    printf("Emitter '%s'\n", this->name);
 }

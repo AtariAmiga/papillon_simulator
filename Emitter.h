@@ -3,5 +3,5 @@ struct Emitter {
 };
 
 struct Emitter* Emitter_new(char* name);
-void Emitter_print(struct Emitter* this);
+void Emitter_println(struct Emitter* this);
 
