@@ -22,7 +22,7 @@ void Terminal_send_message(struct Terminal* this, const char* text, const char* 
     assert(text != NULL);
     assert(recipient != NULL);
 
-    struct Message* message = Message_new(this, text, recipient);
+    struct Message* message = Message_new(this->name, text, recipient);
 
     World_queueMessage(this->owner, message);
 }

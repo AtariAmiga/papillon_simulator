@@ -4,12 +4,12 @@
 #include "Terminal.h"
 
 struct Message {
-    const struct Terminal* emitter;
+    const char* emitterName;
     const char* text;
     const char* recipientName;
 };
 
-struct Message* Message_new(struct Terminal* emitter, const char* text, const char* recipientName);
+struct Message* Message_new(const char *emitterName, const char* text, const char* recipientName);
 void Message_println(struct Message* this);
 
 #endif
