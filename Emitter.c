@@ -19,5 +19,7 @@ void Emitter_send_message(struct Emitter* this, const char* message, struct Emit
     assert(this != NULL);
     assert(message != NULL);
     assert(recipient != NULL);
-    // todo
+
+    World_queueMessage(this->owner, this, message, recipient);
 }
+
