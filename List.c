@@ -34,6 +34,9 @@ void List_insertFirst(struct List* this, void* data) {
 }
 
 void* List_removeFirst(struct List* this) {
+    if( this->head == NULL )
+        return NULL;
+
     struct ListNode *first = this->head;
 
     this->head = this->head->next;

@@ -10,8 +10,9 @@ int main() {
     struct Emitter* a = Emitter_new("Antoine", w);
 
     Emitter_send_message(v, "Hello Antoine", a);
+    Emitter_send_message(a, "Hello Vincent", v);
 
-    Emitter_println(v);
-    World_println(w);
+    World_runOneStep(w);
+
     return 0;
 }

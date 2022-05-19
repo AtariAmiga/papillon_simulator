@@ -12,6 +12,7 @@ struct World {
 
 struct World* World_new(char* name);
 void World_println(struct World* this);
+void World_runOneStep(struct World* this);
 void World_queueMessage(struct World* this, struct Message* message);
 
 #endif

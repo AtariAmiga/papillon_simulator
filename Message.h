@@ -10,5 +10,6 @@ struct Message {
 };
 
 struct Message* Message_new(struct Emitter* emitter, const char* text, struct Emitter* recipient);
+void Message_println(struct Message* this);
 
 #endif

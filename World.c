@@ -16,6 +16,14 @@ void World_queueMessage(struct World* this, struct Message* message) {
     List_insertFirst( this->messageList, message );
 }
 
+void World_runOneStep(struct World* this) {
+    struct Message *message;
+    while( (message = List_removeFirst(this->messageList)) != NULL ) {
+        Message_println(message);
+        // message->recipient
+    }
+}
+
 void World_println(struct World* this) {
     assert(this != NULL);
     printf("World '%s'\n", this->name);
