@@ -4,10 +4,14 @@
 #include "World.h"
 
 int main() {
-    printf("Hello, World!\n");
     struct World* w = World_new("The world");
-    struct Emitter* e = Emitter_new("Vincent", w);
-    Emitter_println(e);
+
+    struct Emitter* v = Emitter_new("Vincent", w);
+    struct Emitter* a = Emitter_new("Antoine", w);
+
+    Emitter_send_message(v, "Hello Antoine", a);
+
+    Emitter_println(v);
     World_println(w);
     return 0;
 }

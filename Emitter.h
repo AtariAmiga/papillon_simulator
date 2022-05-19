@@ -8,7 +8,8 @@ struct Emitter {
     struct World* owner;
 };
 
-struct Emitter* Emitter_new(char* name, struct World* owner);
+struct Emitter* Emitter_new(char *name, struct World* owner);
 void Emitter_println(struct Emitter* this);
+void Emitter_send_message(struct Emitter* this, const char* message, struct Emitter* recipient);
 
 #endif
