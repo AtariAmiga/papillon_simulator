@@ -11,8 +11,8 @@ int main() {
     struct Terminal* v = World_newTerminal(w, "Vincent");
     struct Terminal* a = World_newTerminal(w, "Antoine");
 
-    Terminal_send_message(v, "Hello Antoine", a);
-    Terminal_send_message(a, "Hello Vincent", v);
+    Terminal_send_message(v, "Hello Antoine", "Antoine");
+    Terminal_send_message(a, "Hello Vincent", "Vincent");
 
     World_runOneStep(w);
 

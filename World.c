@@ -9,14 +9,14 @@ struct World* World_new(char* name) {
 
     this->name = name;
     this->messageList = List_new();
-    this->emitterList = List_new();
+    this->terminalList = List_new();
 
     return this;
 }
 
 struct Terminal* World_newTerminal(struct World* this, char* name) {
     struct Terminal* emitter = Terminal_new(name, this);
-    List_insertFirst(this->emitterList, emitter);
+    List_insertFirst(this->terminalList, emitter);
     return emitter;
 }
 
@@ -29,12 +29,10 @@ void World_runOneStep(struct World* this) {
     while( (message = List_removeFirst(this->messageList)) != NULL ) {
         Message_println(message);
 
-        struct ListNode* node = this->emitterList->head;
+        struct ListNode* node = this->terminalList->head;
         while( node != NULL ) {
-            Terminal_println((struct Terminal*) node->data);
-            if( message->recipient == (struct Terminal*) node->data ) {
-                printf("transferring message\n");
-            }
+            struct Terminal* terminal = node->data;
+            Terminal_receive_message( terminal, message );
             node = node->next;
         }
     }

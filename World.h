@@ -8,7 +8,7 @@
 struct World {
     char* name;
     struct List* messageList;
-    struct List* emitterList;
+    struct List* terminalList;
 };
 
 struct World* World_new(char* name);

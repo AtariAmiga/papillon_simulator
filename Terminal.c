@@ -1,3 +1,4 @@
+#include <string.h>
 #include "NEW.h"
 
 #include "Terminal.h"
@@ -16,7 +17,7 @@ void Terminal_println(struct Terminal* this) {
     printf("Terminal '%s'\n", this->name);
 }
 
-void Terminal_send_message(struct Terminal* this, const char* text, struct Terminal* recipient) {
+void Terminal_send_message(struct Terminal* this, const char* text, const char* recipient) {
     assert(this != NULL);
     assert(text != NULL);
     assert(recipient != NULL);
@@ -24,5 +25,18 @@ void Terminal_send_message(struct Terminal* this, const char* text, struct Termi
     struct Message* message = Message_new(this, text, recipient);
 
     World_queueMessage(this->owner, message);
+}
+
+void Terminal_receive_message(struct Terminal* this, struct Message* message) {
+    assert(this != NULL);
+    assert(message != NULL);
+
+    printf( "Terminal %s received: ", this->name );
+    Message_println(message);
+    if(strcmp(message->recipientName, this->name) == 0 ) {
+        printf( "\tprocess, this is for me\n" );
+    } else {
+        printf( "\tsend, this is NOT for me\n" );
+    }
 }
 

@@ -6,10 +6,10 @@
 struct Message {
     const struct Terminal* emitter;
     const char* text;
-    struct Terminal* recipient;
+    const char* recipientName;
 };
 
-struct Message* Message_new(struct Terminal* emitter, const char* text, struct Terminal* recipient);
+struct Message* Message_new(struct Terminal* emitter, const char* text, const char* recipientName);
 void Message_println(struct Message* this);
 
 #endif
