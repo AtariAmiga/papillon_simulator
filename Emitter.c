@@ -2,6 +2,7 @@
 
 #include "Emitter.h"
 #include "World.h"
+#include "Message.h"
 
 struct Emitter* Emitter_new(char *name, struct World* owner) {
     struct Emitter* i = NEW(Emitter);
@@ -15,11 +16,13 @@ void Emitter_println(struct Emitter* this) {
     printf("Emitter '%s'\n", this->name);
 }
 
-void Emitter_send_message(struct Emitter* this, const char* message, struct Emitter* recipient) {
+void Emitter_send_message(struct Emitter* this, const char* text, struct Emitter* recipient) {
     assert(this != NULL);
-    assert(message != NULL);
+    assert(text != NULL);
     assert(recipient != NULL);
 
-    World_queueMessage(this->owner, this, message, recipient);
+    struct Message* message = Message_new(this, text, recipient);
+
+    World_queueMessage(this->owner, message);
 }
 

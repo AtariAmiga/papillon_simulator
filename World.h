@@ -3,6 +3,7 @@
 
 #include "Emitter.h"
 #include "List.h"
+#include "Message.h"
 
 struct World {
     char* name;
@@ -11,6 +12,6 @@ struct World {
 
 struct World* World_new(char* name);
 void World_println(struct World* this);
-void World_queueMessage(struct World* this, struct Emitter* emitter, const char* message, struct Emitter* recipient);
+void World_queueMessage(struct World* this, struct Message* message);
 
 #endif

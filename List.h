@@ -1,8 +1,7 @@
+#ifndef LIST_H_INCLUDED
+#define LIST_H_INCLUDED
+
 #include "NEW.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
 struct ListNode {
     void* data;
@@ -19,3 +18,5 @@ void List_insertFirst(struct List* this, void* data);
 void* List_removeFirst(struct List* this);
 bool List_isEmpty(struct List* this);
 int List_length(struct List* this);
+
+#endif

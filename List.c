@@ -7,9 +7,9 @@
 
 // todo: replace linked list by static array
 struct List* List_new() {
-    struct List* i = NEW(List);
-    i->head = NULL;
-    return i;
+    struct List* this = NEW(List);
+    this->head = NULL;
+    return this;
 }
 
 void List_printf(struct List* this, char* printer() ) {
