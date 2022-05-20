@@ -3,30 +3,30 @@
 #include "Terminal.h"
 
 struct Message* Message_new(const char* emitterName, const char* text, const char* recipientName) {
-    struct Message* this = NEW(Message);
+    struct Message* self = NEW(Message);
 
-    this->emitterName = emitterName;
-    this->text = text;
-    this->recipientName = recipientName;
-    this->hopsCount = 0;
+    self->emitterName = emitterName;
+    self->text = text;
+    self->recipientName = recipientName;
+    self->hopsCount = 0;
 
-    return this;
+    return self;
 }
 
-struct Message* Message_clone_and_increment(struct Message* this) {
+struct Message* Message_clone_and_increment(struct Message* self) {
     struct Message* clone = NEW(Message);
 
     // todo: fully clone?
-    clone->emitterName = this->emitterName;
-    clone->text = this->text;
-    clone->recipientName = this->recipientName;
-    clone->hopsCount = this->hopsCount + 1;
+    clone->emitterName = self->emitterName;
+    clone->text = self->text;
+    clone->recipientName = self->recipientName;
+    clone->hopsCount = self->hopsCount + 1;
 
     return clone;
 }
 
-void Message_println(struct Message* this) {
-    assert(this != NULL );
-    printf("Message: %s '%s' > %s\n", this->emitterName, this->text, this->recipientName );
+void Message_println(struct Message* self) {
+    assert(self != NULL );
+    printf("Message: %s '%s' > %s\n", self->emitterName, self->text, self->recipientName );
 }
 

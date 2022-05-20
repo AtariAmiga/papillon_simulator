@@ -7,13 +7,13 @@
 
 // todo: replace linked list by static array
 struct List* List_new() {
-    struct List* this = NEW(List);
-    this->head = NULL;
-    return this;
+    struct List* self = NEW(List);
+    self->head = NULL;
+    return self;
 }
 
-void List_printf(struct List* this, char* printer() ) {
-    struct ListNode* p = this->head;
+void List_printf(struct List* self, char* printer() ) {
+    struct ListNode* p = self->head;
     printf("\n[ ");
 
     while(p != NULL ) {
@@ -24,22 +24,22 @@ void List_printf(struct List* this, char* printer() ) {
     printf(" ]");
 }
 
-void List_insertFirst(struct List* this, void* data) {
+void List_insertFirst(struct List* self, void* data) {
     struct ListNode *link = NEW(ListNode);
 
     link->data = data;
 
-    link->next = this->head;
-    this->head = link;
+    link->next = self->head;
+    self->head = link;
 }
 
-void* List_removeFirst(struct List* this) {
-    if( this->head == NULL )
+void* List_removeFirst(struct List* self) {
+    if( self->head == NULL )
         return NULL;
 
-    struct ListNode *first = this->head;
+    struct ListNode *first = self->head;
 
-    this->head = this->head->next;
+    self->head = self->head->next;
     void* data = first->data;
 
     free(first);
@@ -47,15 +47,15 @@ void* List_removeFirst(struct List* this) {
     return data;
 }
 
-bool List_isEmpty(struct List* this) {
-    return this->head == NULL;
+bool List_isEmpty(struct List* self) {
+    return self->head == NULL;
 }
 
-int List_length(struct List* this) {
+int List_length(struct List* self) {
     int length = 0;
     struct ListNode *current;
 
-    for( current = this->head; current != NULL; current = current->next)
+    for( current = self->head; current != NULL; current = current->next)
         length++;
 
     return length;

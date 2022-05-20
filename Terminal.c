@@ -12,30 +12,30 @@ struct Terminal* Terminal_new(char *name, struct World* owner) {
     return i;
 }
 
-void Terminal_println(struct Terminal* this) {
-    assert(this != NULL);
-    printf("Terminal '%s'\n", this->name);
+void Terminal_println(struct Terminal* self) {
+    assert(self != NULL);
+    printf("Terminal '%s'\n", self->name);
 }
 
-void Terminal_send_message(struct Terminal* this, const char* text, const char* recipient) {
-    assert(this != NULL);
+void Terminal_send_message(struct Terminal* self, const char* text, const char* recipient) {
+    assert(self != NULL);
     assert(text != NULL);
     assert(recipient != NULL);
 
-    struct Message* message = Message_new(this->name, text, recipient);
+    struct Message* message = Message_new(self->name, text, recipient);
 
-    World_queueMessage(this->owner, message);
+    World_queueMessage(self->owner, message);
 }
 
-void Terminal_receive_message(struct Terminal* this, struct Message* message) {
-    assert(this != NULL);
+void Terminal_receive_message(struct Terminal* self, struct Message* message) {
+    assert(self != NULL);
     assert(message != NULL);
 
-    printf( "Terminal %s received: ", this->name );
+    printf( "Terminal %s received: ", self->name );
     Message_println(message);
 
-    if(strcmp(message->recipientName, this->name) == 0 ) {
-        printf("\tprocess, this is for me\n");
+    if(strcmp(message->recipientName, self->name) == 0 ) {
+        printf("\tprocess, self is for me\n");
     }
 }
 

@@ -3,12 +3,12 @@
 #include "Location.h"
 
 struct Location* Location_new(float x, float y) {
-    struct Location* this = NEW(Location);
+    struct Location* self = NEW(Location);
 
-    this->x = x;
-    this->y = y;
+    self->x = x;
+    self->y = y;
 
-    return this;
+    return self;
 }
 
 float distance(struct Location* a, struct Location* b) {
@@ -17,7 +17,7 @@ float distance(struct Location* a, struct Location* b) {
     return sqrtf(dx*dx + dy*dy);
 }
 
-void Location_println(struct Location* this) {
-    assert( NULL != this);
-    printf( "(%f, %f)", this->x, this->y);
+void Location_println(struct Location* self) {
+    assert( NULL != self);
+    printf( "(%f, %f)", self->x, self->y);
 }
