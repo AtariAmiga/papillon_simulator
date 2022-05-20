@@ -10,6 +10,7 @@ add_library(papillon
         World.h World.c
         List.h List.c
         Message.h Message.c
-        Repeater.h Repeater.c)
+        Repeater.h Repeater.c
+        Location.h Location.c)
 
 target_link_libraries(papillon_simulator papillon)
