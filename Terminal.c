@@ -33,10 +33,9 @@ void Terminal_receive_message(struct Terminal* this, struct Message* message) {
 
     printf( "Terminal %s received: ", this->name );
     Message_println(message);
+
     if(strcmp(message->recipientName, this->name) == 0 ) {
-        printf( "\tprocess, this is for me\n" );
-    } else {
-        printf( "\tsend, this is NOT for me\n" );
+        printf("\tprocess, this is for me\n");
     }
 }
 

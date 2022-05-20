@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "Terminal.h"
+#include "Repeater.h"
 #include "World.h"
 
 int main() {
@@ -8,6 +9,7 @@ int main() {
 
     struct World* w = World_new("The world");
 
+    struct Repeater* r1 = World_newRepeater(w, "Repeater1");
     struct Terminal* v = World_newTerminal(w, "Vincent");
     struct Terminal* a = World_newTerminal(w, "Antoine");
 

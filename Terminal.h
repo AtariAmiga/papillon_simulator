@@ -2,6 +2,7 @@
 #define TERMINAL_H_INCLUDED
 
 #include "World.h"
+#include "Message.h"
 
 struct Terminal {
     char* name;

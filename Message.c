@@ -8,8 +8,21 @@ struct Message* Message_new(const char* emitterName, const char* text, const cha
     this->emitterName = emitterName;
     this->text = text;
     this->recipientName = recipientName;
+    this->hopsCount = 0;
 
     return this;
+}
+
+struct Message* Message_clone_and_increment(struct Message* this) {
+    struct Message* clone = NEW(Message);
+
+    // todo: fully clone?
+    clone->emitterName = this->emitterName;
+    clone->text = this->text;
+    clone->recipientName = this->recipientName;
+    clone->hopsCount = this->hopsCount + 1;
+
+    return clone;
 }
 
 void Message_println(struct Message* this) {
