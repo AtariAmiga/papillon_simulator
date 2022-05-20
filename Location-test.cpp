@@ -1,12 +1,12 @@
 #include <catch2/catch_test_macros.hpp>
 
-unsigned int factorial( unsigned int number ) {
-    return number <= 1 ? number : factorial(number-1)*number;
+extern "C" {
+#include "Location.h"
 }
 
-TEST_CASE( "factorials are computed", "[factorial]" ) {
-    REQUIRE( factorial(1) == 1 );
-    REQUIRE( factorial(2) == 2 );
-    REQUIRE( factorial(3) == 6 );
-    REQUIRE( factorial(10) == 3628800 );
+TEST_CASE( "Location" ) {
+    struct Location* l1 = Location_new(-10.0f, -5.0f);
+    struct Location* l2 = Location_new(7.0f, 9.0f);
+
+    REQUIRE( distance(l1, l2) == 22.02271f ); // todo: Approx(...);
 }

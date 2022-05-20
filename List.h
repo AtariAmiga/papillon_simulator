@@ -13,10 +13,10 @@ struct List {
 };
 
 struct List* List_new();
-void List_printf(struct List* this, char* printer());
-void List_insertFirst(struct List* this, void* data);
-void* List_removeFirst(struct List* this);
-bool List_isEmpty(struct List* this);
-int List_length(struct List* this);
+void List_printf(struct List* self, char* printer());
+void List_insertFirst(struct List* self, void* data);
+void* List_removeFirst(struct List* self);
+bool List_isEmpty(struct List* self);
+int List_length(struct List* self);
 
 #endif

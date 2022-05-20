@@ -9,7 +9,7 @@ struct Repeater {
 };
 
 struct Repeater* Repeater_new(char *name, struct World* owner);
-void Repeater_println(struct Repeater* this);
-void Repeater_receive_message(struct Repeater* this, struct Message* message);
+void Repeater_println(struct Repeater* self);
+void Repeater_receive_message(struct Repeater* self, struct Message* message);
 
 #endif

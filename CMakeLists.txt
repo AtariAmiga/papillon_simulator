@@ -16,14 +16,16 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_library(papillon_lib
-        Terminal.h Terminal.c
-        World.h World.c
         List.h List.c
+        Location.h Location.c
         Message.h Message.c
         Repeater.h Repeater.c
-        Location.h Location.c)
+        Terminal.h Terminal.c
+        World.h World.c
+        )
 
-add_executable(tests Location-test.cpp)
+add_executable(tests
+        Location-test.cpp)
 target_link_libraries(tests
         PRIVATE Catch2::Catch2WithMain
         papillon_lib)
