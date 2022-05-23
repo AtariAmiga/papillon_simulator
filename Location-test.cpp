@@ -3,24 +3,22 @@
 #include "catch2/catch_approx.hpp"
 using namespace Catch::literals;
 
-extern "C" {
 #include "Location.h"
-}
 
 TEST_CASE( "Location" ) {
-    struct Location* l1 = Location_new(-10.0f, -5.0f);
-    struct Location* l2 = Location_new(7.0f, 9.0f);
+    const Location* l1 = new Location(-10.0f, -5.0f);
+    const Location* l2 = new Location(7.0f, 9.0f);
 
-    REQUIRE( distance(l1, l2) ==  Catch::Approx(22.02271).epsilon(0.000001) );
+    REQUIRE( locationDistance(l1, l2) ==  Catch::Approx(22.02271).epsilon(0.000001) );
 
     char string[500]; // todo: tool!
     memset( string, 0, 500); // todo: tool!
     setbuf(stdout, string); // todo: tool!
 
-    Location_print(l1);
-    Location_print(l2);
+    l1->print();
+    l2->print();
 
     setbuf(stdout,NULL); // todo: tool!
 
-    REQUIRE( strcmp(string, "(-10.000000, -5.000000)(7.000000, 9.000000)") == 0 );
+    REQUIRE( strcmp(string, "(-10, -5)(7, 9)") == 0 );
 }

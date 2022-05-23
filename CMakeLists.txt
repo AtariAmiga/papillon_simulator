@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(simulator C)
-set(CMAKE_C_STANDARD 17)
+project(simulator CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 project(tests CXX)
 set(CMAKE_CXX_STANDARD 11)
@@ -17,11 +17,11 @@ FetchContent_MakeAvailable(Catch2)
 
 add_library(papillon_lib
         List.h List.c
-        Location.h Location.c
-        Message.h Message.c
-        Repeater.h Repeater.c
-        Terminal.h Terminal.c
-        World.h World.c
+        Location.h Location.cpp
+        Message.h Message.cpp
+        Repeater.h Repeater.cpp
+        Terminal.h Terminal.cpp
+        World.h World.cpp
         )
 
 add_executable(tests
@@ -30,6 +30,6 @@ target_link_libraries(tests
         PRIVATE Catch2::Catch2WithMain
         papillon_lib)
 
-add_executable(simulator main.c)
+add_executable(simulator main.cpp)
 target_link_libraries(simulator
         papillon_lib)

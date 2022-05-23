@@ -1,18 +1,19 @@
 #ifndef MESSAGE_H_INCLUDED
 #define MESSAGE_H_INCLUDED
 
-#include "Location.h"
+class Location;
 
-struct Message {
-    struct Location* emittedLocation;
+class Message {
+public:
+    Location* emittedLocation;
     const char* emitterName;
     const char* text;
     const char* recipientName;
     int hopsCount;
-};
 
-struct Message* Message_new(struct Location* location, const char *emitterName, const char* text, const char* recipientName);
-struct Message* Message_cloneAndIncrement(struct Message* self, struct Location* emitterLocation);
-void Message_println(struct Message* self);
+    Message(Location* location, const char *emitterName, const char* text, const char* recipientName);
+    Message* cloneAndIncrement(struct Location* emitterLocation) const;
+    void println() const;
+};
 
 #endif

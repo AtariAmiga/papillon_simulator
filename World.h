@@ -1,22 +1,26 @@
 #ifndef WORLD_H_INCLUDED
 #define WORLD_H_INCLUDED
 
-#include "Terminal.h"
-#include "List.h"
-#include "Message.h"
+#include <list>
 
-struct World {
-    char* name;
-    struct List* messageList;
-    struct List* terminalList;
-    struct List* repeaterList;
+class Terminal;
+class Repeater;
+class Message;
+
+class World {
+public:
+    const char* _name;
+    std::list<Message*> messageList;
+    std::list<Terminal*> terminalList;
+    std::list<Repeater*> repeaterList;
+
+    explicit World(const char* name);
+    Terminal* newTerminal(const char* name, float x, float y);
+    Repeater* newRepeater(const char* name, float x, float y);
+    void runOneStep();
+    void queueMessage(struct Message* message);
+
+    void println() const;
 };
-
-struct World* World_new(char* name);
-struct Terminal* World_newTerminal(struct World* self, char* name, float x, float y);
-struct Repeater* World_newRepeater(struct World* self, char* name, float x, float y);
-void World_println(struct World* self);
-void World_runOneStep(struct World* self);
-void World_queueMessage(struct World* self, struct Message* message);
 
 #endif

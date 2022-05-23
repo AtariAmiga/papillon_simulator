@@ -1,14 +1,16 @@
 #ifndef LOCATION_H_INCLUDED
 #define LOCATION_H_INCLUDED
 
-struct Location {
+class Location {
+public:
     float x;
     float y;
+
+    Location(float x, float y);
+    Location* clone() const;
+    void print() const;
 };
 
-struct Location* Location_new(float x, float y);
-struct Location* Location_clone(struct Location* location);
-float distance(struct Location* a, struct Location* b);
-void Location_print(struct Location* self);
+float locationDistance(const Location* a, const Location* b);
 
 #endif

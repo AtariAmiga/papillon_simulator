@@ -1,19 +1,21 @@
 #ifndef TERMINAL_H_INCLUDED
 #define TERMINAL_H_INCLUDED
 
-#include "World.h"
-#include "Message.h"
-#include "Location.h"
+class World;
+class Message;
+class Location;
 
-struct Terminal {
-    struct Location* location;
-    char* name;
-    struct World* owner;
+class Terminal {
+public:
+    Location* location;
+    const char* name;
+    World* owner;
+
+    Terminal(const char* name, struct World* owner, float x, float y);
+    void sendMessage(const char* text, const char* recipient) const;
+    void receiveMessage(struct Message* message) const;
+
+    void println() const;
 };
-
-struct Terminal* Terminal_new(char *name, struct World* owner, float x, float y);
-void Terminal_println(struct Terminal* self);
-void Terminal_sendMessage(struct Terminal* self, const char* text, const char* recipient);
-void Terminal_receiveMessage(struct Terminal* self, struct Message* message);
 
 #endif

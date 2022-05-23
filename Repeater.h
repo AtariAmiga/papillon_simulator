@@ -1,19 +1,22 @@
 #ifndef REPEATER_H_INCLUDED
 #define REPEATER_H_INCLUDED
 
-#include "World.h"
+#include <list>
+class World;
+class Location;
 
-struct Repeater {
-    struct List* messageList;
-    struct Location* location;
-    char* name;
-    struct World* worldOwner;
+class Repeater {
+public:
+    std::list<Message> messageList;
+    Location* location{};
+    const char* name;
+    World* worldOwner;
+
+    Repeater(const char *name, struct World* owner, float x, float y);
+    void receiveMessage( Message& message);
+    void runOneStep();
+    
+    void println() const;
 };
-
-struct Repeater* Repeater_new(char *name, struct World* owner, float x, float y);
-void Repeater_receiveMessage(struct Repeater* self, struct Message* message);
-void Repeater_runOneStep(struct Repeater* self);
-
-void Repeater_println(struct Repeater* self);
 
 #endif
