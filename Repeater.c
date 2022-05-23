@@ -5,11 +5,12 @@
 #include "World.h"
 #include "Message.h"
 
-struct Repeater* Repeater_new(char *name, struct World* owner) {
-    struct Repeater* i = NEW(Repeater);
-    i->name = name;
-    i->owner = owner;
-    return i;
+struct Repeater* Repeater_new(char *name, struct World* owner, float x, float y) {
+    struct Repeater* self = NEW(Repeater);
+    self->location = Location_new(x, y);
+    self->name = name;
+    self->owner = owner;
+    return self;
 }
 
 void Repeater_println(struct Repeater* self) {

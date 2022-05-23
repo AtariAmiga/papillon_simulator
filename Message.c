@@ -2,9 +2,10 @@
 #include "Message.h"
 #include "Terminal.h"
 
-struct Message* Message_new(const char* emitterName, const char* text, const char* recipientName) {
+struct Message* Message_new(struct Location* location, const char* emitterName, const char* text, const char* recipientName) {
     struct Message* self = NEW(Message);
 
+    self->emittedLocation = Location_clone(location);
     self->emitterName = emitterName;
     self->text = text;
     self->recipientName = recipientName;

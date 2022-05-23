@@ -9,9 +9,9 @@ int main() {
 
     struct World* w = World_new("The world");
 
-    struct Repeater* r1 = World_newRepeater(w, "Repeater1");
-    struct Terminal* v = World_newTerminal(w, "Vincent");
-    struct Terminal* a = World_newTerminal(w, "Antoine");
+    struct Terminal* v = World_newTerminal(w, "Vincent", 0, 0);
+    struct Terminal* a = World_newTerminal(w, "Antoine", 1500, 0);
+    // struct Repeater* r1 = World_newRepeater(w, "Repeater1", 750, 0);
 
     Terminal_send_message(v, "Hello Antoine", "Antoine");
     Terminal_send_message(a, "Hello Vincent", "Vincent");

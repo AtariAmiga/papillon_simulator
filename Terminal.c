@@ -5,11 +5,13 @@
 #include "World.h"
 #include "Message.h"
 
-struct Terminal* Terminal_new(char *name, struct World* owner) {
-    struct Terminal* i = NEW(Terminal);
-    i->name = name;
-    i->owner = owner;
-    return i;
+struct Terminal* Terminal_new(char *name, struct World* owner, float x, float y) {
+    struct Terminal* self = NEW(Terminal);
+
+    self->location = Location_new(x, y);
+    self->name = name;
+    self->owner = owner;
+    return self;
 }
 
 void Terminal_println(struct Terminal* self) {
@@ -22,7 +24,7 @@ void Terminal_send_message(struct Terminal* self, const char* text, const char* 
     assert(text != NULL);
     assert(recipient != NULL);
 
-    struct Message* message = Message_new(self->name, text, recipient);
+    struct Message* message = Message_new(self->location, self->name, text, recipient);
 
     World_queueMessage(self->owner, message);
 }

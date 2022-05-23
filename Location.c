@@ -11,6 +11,15 @@ struct Location* Location_new(float x, float y) {
     return self;
 }
 
+struct Location* Location_clone(struct Location* location) {
+    struct Location* self = NEW(Location);
+
+    self->x = location->x;
+    self->y = location->y;
+
+    return self;
+}
+
 float distance(struct Location* a, struct Location* b) {
     float dx = (a->x - b->x);
     float dy = (a->y - b->y);

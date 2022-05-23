@@ -16,14 +16,14 @@ struct World* World_new(char* name) {
     return self;
 }
 
-struct Terminal* World_newTerminal(struct World* self, char* name) {
-    struct Terminal* emitter = Terminal_new(name, self);
+struct Terminal* World_newTerminal(struct World* self, char* name, float x, float y) {
+    struct Terminal* emitter = Terminal_new(name, self, x, y);
     List_insertFirst(self->terminalList, emitter);
     return emitter;
 }
 
-struct Repeater* World_newRepeater(struct World* self, char* name) {
-    struct Repeater* repeater = Repeater_new(name, self);
+struct Repeater* World_newRepeater(struct World* self, char* name, float x, float y) {
+    struct Repeater* repeater = Repeater_new(name, self, x, y);
     List_insertFirst(self->repeaterList, repeater);
     return repeater;
 }
@@ -40,7 +40,9 @@ void World_runOneStep(struct World* self) {
         struct ListNode* terminalNode = self->terminalList->head;
         while(terminalNode != NULL ) {
             struct Terminal* terminal = terminalNode->data;
-            Terminal_receive_message( terminal, message );
+            if(distance(message->emittedLocation, terminal->location) < 1000) // todo: distance in meters in parameter/variable...
+                Terminal_receive_message( terminal, message );
+
             terminalNode = terminalNode->next;
         }
     }
