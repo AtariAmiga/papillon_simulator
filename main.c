@@ -13,8 +13,8 @@ int main() {
     struct Terminal* a = World_newTerminal(w, "Antoine", 1500, 0);
     struct Repeater* r1 = World_newRepeater(w, "Repeater1", 750, 0);
 
-    Terminal_send_message(v, "Hello Antoine", "Antoine");
-    Terminal_send_message(a, "Hello Vincent", "Vincent");
+    Terminal_sendMessage(v, "Hello Antoine", "Antoine");
+    Terminal_sendMessage(a, "Hello Vincent", "Vincent");
 
     World_runOneStep(w);
     Repeater_runOneStep( r1 ); // todo: include this in World

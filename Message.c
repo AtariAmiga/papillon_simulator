@@ -14,7 +14,7 @@ struct Message* Message_new(struct Location* location, const char* emitterName, 
     return self;
 }
 
-struct Message* Message_clone_and_increment(struct Message* self, struct Location* emitterLocation) {
+struct Message* Message_cloneAndIncrement(struct Message* self, struct Location* emitterLocation) {
     struct Message* clone = NEW(Message);
 
     clone->emittedLocation = Location_clone(emitterLocation);

@@ -19,7 +19,7 @@ void Repeater_println(struct Repeater* self) {
     printf("Repeater '%s'\n", self->name);
 }
 
-void Repeater_receive_message(struct Repeater* self, struct Message* message) {
+void Repeater_receiveMessage(struct Repeater* self, struct Message* message) {
     assert(self != NULL);
     assert(message != NULL);
 
@@ -35,7 +35,7 @@ void Repeater_runOneStep(struct Repeater* self) {
         if( NULL == message)
             break;
 
-        struct Message* clone = Message_clone_and_increment(message, self->location);
+        struct Message* clone = Message_cloneAndIncrement(message, self->location);
         World_queueMessage(self->worldOwner, clone);
     }
 }

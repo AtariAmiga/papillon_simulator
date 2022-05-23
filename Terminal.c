@@ -19,7 +19,7 @@ void Terminal_println(struct Terminal* self) {
     printf("Terminal '%s'\n", self->name);
 }
 
-void Terminal_send_message(struct Terminal* self, const char* text, const char* recipient) {
+void Terminal_sendMessage(struct Terminal* self, const char* text, const char* recipient) {
     assert(self != NULL);
     assert(text != NULL);
     assert(recipient != NULL);
@@ -29,7 +29,7 @@ void Terminal_send_message(struct Terminal* self, const char* text, const char* 
     World_queueMessage(self->owner, message);
 }
 
-void Terminal_receive_message(struct Terminal* self, struct Message* message) {
+void Terminal_receiveMessage(struct Terminal* self, struct Message* message) {
     assert(self != NULL);
     assert(message != NULL);
 

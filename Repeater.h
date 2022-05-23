@@ -11,7 +11,7 @@ struct Repeater {
 };
 
 struct Repeater* Repeater_new(char *name, struct World* owner, float x, float y);
-void Repeater_receive_message(struct Repeater* self, struct Message* message);
+void Repeater_receiveMessage(struct Repeater* self, struct Message* message);
 void Repeater_runOneStep(struct Repeater* self);
 
 void Repeater_println(struct Repeater* self);

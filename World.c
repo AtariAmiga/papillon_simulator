@@ -47,7 +47,7 @@ void World_runOneStep(struct World* self) {
             struct Terminal* terminal = terminalNode->data;
             float d = distance(message->emittedLocation, terminal->location);
             if(0.0f < d && d < SIGNAL_RANGE_IN_M)
-                Terminal_receive_message( terminal, message );
+                Terminal_receiveMessage(terminal, message);
 
             terminalNode = terminalNode->next;
         }
@@ -58,7 +58,7 @@ void World_runOneStep(struct World* self) {
             struct Repeater* repeater = repeaterNode->data;
             float d = distance(message->emittedLocation, repeater->location);
             if(0.0f < d && d < SIGNAL_RANGE_IN_M)
-                Repeater_receive_message( repeater, message );
+                Repeater_receiveMessage(repeater, message);
 
             repeaterNode = repeaterNode->next;
         }
