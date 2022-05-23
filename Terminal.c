@@ -33,8 +33,8 @@ void Terminal_receive_message(struct Terminal* self, struct Message* message) {
     assert(self != NULL);
     assert(message != NULL);
 
-    if(strcmp(message->recipientName, self->name) == 0 ) {
-        printf( "Terminal %s received: ", self->name );
+    if(strcmp(message->recipientName, self->name) == 0 ) { // todo: should not process now. Should queue it, then process it when runOneStep is called
+        printf( "'%s' received: ", self->name );
         Message_println(message);
     }
 }

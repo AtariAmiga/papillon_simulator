@@ -23,7 +23,7 @@ void Repeater_receive_message(struct Repeater* self, struct Message* message) {
     assert(self != NULL);
     assert(message != NULL);
 
-    printf( "Repeater %s received: ", self->name );
+    printf( "'%s' received: ", self->name );
     Message_println(message);
 
     List_insertFirst(self->messageList, message);

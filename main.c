@@ -18,6 +18,7 @@ int main() {
 
     World_runOneStep(w);
     Repeater_runOneStep( r1 ); // todo: include this in World
+    World_runOneStep(w);
 
     return 0;
 }

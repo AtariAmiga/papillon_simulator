@@ -37,7 +37,7 @@ void World_queueMessage(struct World* self, struct Message* message) {
 void World_runOneStep(struct World* self) {
     struct Message *message;
     while( (message = List_removeFirst(self->messageList)) != NULL ) {
-        printf("World: ");
+        printf("'%s' processing: ", self->name);
         Message_println(message);
 
         // todo: do better? 0.0f < d means that emitter should not receive its own emitted messages (unless comes back later after being repeated)

@@ -9,7 +9,7 @@ struct World {
     char* name;
     struct List* messageList;
     struct List* terminalList;
-    struct List *repeaterList;
+    struct List* repeaterList;
 };
 
 struct World* World_new(char* name);
