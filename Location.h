@@ -10,10 +10,10 @@ public:
 
     Location(float x, float y);
     Location* clone() const;
-    void print() const;
 
-    std::ostream &operator<<(std::ostream &os) const;
 };
+
+std::ostream &operator<<(std::ostream &os, const Location* location);
 
 float locationDistance(const Location* a, const Location* b);
 

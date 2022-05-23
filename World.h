@@ -2,6 +2,7 @@
 #define WORLD_H_INCLUDED
 
 #include <list>
+#include <iostream>
 
 class Terminal;
 class Repeater;
@@ -19,8 +20,8 @@ public:
     Repeater* newRepeater(const char* name, float x, float y);
     void runOneStep();
     void queueMessage(struct Message* message);
-
-    void println() const;
 };
+
+std::ostream& operator<<(std::ostream &os, const World* world);
 
 #endif

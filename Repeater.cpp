@@ -12,15 +12,12 @@ Repeater::Repeater(const char *name, struct World* owner, float x, float y) {
     this->worldOwner = owner;
 }
 
-void Repeater::println() const {
-    std::cout << "Repeater '" << this->name << "'" << std::endl;
+std::ostream& operator<<(std::ostream& os, const Repeater* repeater) {
+    return os << "Repeater '" << repeater->name << "'" << std::endl;
 }
 
 void Repeater::receiveMessage(Message *message) {
-    std::cout << "'" <<  this->name << " received: ";
-    message->println();
-    std::cout << std::endl;
-
+    std::cout << "'" <<  this->name << " received: " << message << std::endl;
     messageList.push_front(message);
 }
 

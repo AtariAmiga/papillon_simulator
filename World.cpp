@@ -31,12 +31,10 @@ void World::queueMessage(Message* message) {
 
 void World::runOneStep() {
     while( ! messageList.empty() ) {
-        auto message = messageList.front();
+        Message* message = messageList.front();
         messageList.pop_front();
 
-        std::cout << "'" << this->_name << "' processing: ";
-        message->println();
-        std::cout << std::endl;
+        std::cout << "'" << this->_name << "' processing: " << message << std::endl;
 
         // todo: do better? 0.0f < d means that emitter should not receive its own emitted messages (unless comes back later after being repeated)
         // Terminals
@@ -55,6 +53,6 @@ void World::runOneStep() {
     }
 }
 
-void World::println() const {
-    std::cout << "World '" << this->_name << "'" << std::endl;
+std::ostream& operator<<(std::ostream &os, const World* world) {
+    return os << "World '" << world->_name << "'" << std::endl;
 }

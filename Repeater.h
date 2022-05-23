@@ -2,6 +2,8 @@
 #define REPEATER_H_INCLUDED
 
 #include <list>
+#include <iostream>
+
 class World;
 class Location;
 
@@ -15,8 +17,9 @@ public:
     Repeater(const char *name, struct World* owner, float x, float y);
     void receiveMessage(Message *message);
     void runOneStep();
-    
-    void println() const;
 };
+
+std::ostream &operator<<(std::ostream &os, const Repeater* repeater);
+
 
 #endif

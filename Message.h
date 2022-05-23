@@ -1,6 +1,8 @@
 #ifndef MESSAGE_H_INCLUDED
 #define MESSAGE_H_INCLUDED
 
+#include <iostream>
+
 class Location;
 
 class Message {
@@ -13,7 +15,8 @@ public:
 
     Message(Location* location, const char *emitterName, const char* text, const char* recipientName);
     Message* cloneAndIncrement(struct Location* emitterLocation) const;
-    void println() const;
 };
+
+std::ostream& operator<<(std::ostream& os,  const Message* message);
 
 #endif
