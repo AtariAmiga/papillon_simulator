@@ -50,7 +50,7 @@ void World::runOneStep() {
         for(const auto& repeater : this->repeaterList) {
             float d = locationDistance(message->emittedLocation, repeater->location);
             if(0.0f < d && d < SIGNAL_RANGE_IN_M)
-                repeater->receiveMessage(*message);
+                repeater->receiveMessage(message);
         }
     }
 }

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(simulator CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 project(tests CXX)
 set(CMAKE_CXX_STANDARD 11)
@@ -16,7 +16,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_library(papillon_lib
-        List.h List.c
         Location.h Location.cpp
         Message.h Message.cpp
         Repeater.h Repeater.cpp
