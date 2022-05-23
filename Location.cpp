@@ -11,8 +11,8 @@ Location* Location::clone() const {
     return new Location(this->x, this->y);
 }
 
-void Location::print() const {
-    std::cout << "(" << this-> x << ", " << this->y << ")";
+std::ostream& Location::operator<<(std::ostream &os) const {
+    return os << "(" << this-> x << ", " << this->y << ")";
 }
 
 float locationDistance(const Location* a, const Location* b) {

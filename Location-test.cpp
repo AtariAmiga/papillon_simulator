@@ -11,14 +11,5 @@ TEST_CASE( "Location" ) {
 
     REQUIRE( locationDistance(l1, l2) ==  Catch::Approx(22.02271).epsilon(0.000001) );
 
-    char string[500]; // todo: tool!
-    memset( string, 0, 500); // todo: tool!
-    setbuf(stdout, string); // todo: tool!
-
-    l1->print();
-    l2->print();
-
-    setbuf(stdout,NULL); // todo: tool!
-
-    REQUIRE( strcmp(string, "(-10, -5)(7, 9)") == 0 );
+    // todo: REQUIRE( strcmp(string, "(-10, -5)(7, 9)") == 0 );
 }

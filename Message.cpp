@@ -20,8 +20,7 @@ Message* Message::cloneAndIncrement(Location* emitterLocation) const {
 }
 
 void Message::println() const {
-    std::cout << "Message ";
-    this->emittedLocation->print();
-    std::cout << "\":" << emitterName << " " << this->text << " " << this->recipientName;
+    std::cout << "Message " << this->emittedLocation << "\":"
+        << emitterName << " " << this->text << " " << this->recipientName;
 }
 
