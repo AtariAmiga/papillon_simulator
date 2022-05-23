@@ -9,7 +9,8 @@ struct Repeater* Repeater_new(char *name, struct World* owner, float x, float y)
     struct Repeater* self = NEW(Repeater);
     self->location = Location_new(x, y);
     self->name = name;
-    self->owner = owner;
+    self->worldOwner = owner;
+    self->messageList = List_new();
     return self;
 }
 
@@ -25,9 +26,17 @@ void Repeater_receive_message(struct Repeater* self, struct Message* message) {
     printf( "Repeater %s received: ", self->name );
     Message_println(message);
 
-    struct Message* message2 = Message_clone_and_increment(message, self->location);
+    List_insertFirst(self->messageList, message);
+}
 
-    // todo: should not send it immediately! Should queue it then send it when runOneStep is called.
-    World_queueMessage(self->owner, message2);
+void Repeater_runOneStep(struct Repeater* self) {
+    for(;;) {
+        struct Message* message = List_removeFirst(self->messageList);
+        if( NULL == message)
+            break;
+
+        struct Message* clone = Message_clone_and_increment(message, self->location);
+        World_queueMessage(self->worldOwner, clone);
+    }
 }
 

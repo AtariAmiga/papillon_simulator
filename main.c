@@ -17,6 +17,7 @@ int main() {
     Terminal_send_message(a, "Hello Vincent", "Vincent");
 
     World_runOneStep(w);
+    Repeater_runOneStep( r1 ); // todo: include this in World
 
     return 0;
 }
