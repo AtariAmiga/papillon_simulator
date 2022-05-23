@@ -33,11 +33,9 @@ void Terminal_receive_message(struct Terminal* self, struct Message* message) {
     assert(self != NULL);
     assert(message != NULL);
 
-    printf( "Terminal %s received: ", self->name );
-    Message_println(message);
-
     if(strcmp(message->recipientName, self->name) == 0 ) {
-        printf("\tprocess, self is for me\n");
+        printf( "Terminal %s received: ", self->name );
+        Message_println(message);
     }
 }
 

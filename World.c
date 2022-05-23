@@ -5,6 +5,8 @@
 #include "Terminal.h"
 #include "Repeater.h"
 
+const float SIGNAL_RANGE_IN_M = 1000.0f;
+
 struct World* World_new(char* name) {
     struct World* self = NEW(World);
 
@@ -35,15 +37,30 @@ void World_queueMessage(struct World* self, struct Message* message) {
 void World_runOneStep(struct World* self) {
     struct Message *message;
     while( (message = List_removeFirst(self->messageList)) != NULL ) {
+        printf("World: ");
         Message_println(message);
 
+        // todo: do better? 0.0f < d means that emitter should not receive its own emitted messages (unless comes back later after being repeated)
+        // Terminals
         struct ListNode* terminalNode = self->terminalList->head;
         while(terminalNode != NULL ) {
             struct Terminal* terminal = terminalNode->data;
-            if(distance(message->emittedLocation, terminal->location) < 1000) // todo: distance in meters in parameter/variable...
+            float d = distance(message->emittedLocation, terminal->location);
+            if(0.0f < d && d < SIGNAL_RANGE_IN_M)
                 Terminal_receive_message( terminal, message );
 
             terminalNode = terminalNode->next;
+        }
+
+        // Repeaters todo: same code for Repeater and Terminal!
+        struct ListNode* repeaterNode = self->repeaterList->head;
+        while(repeaterNode != NULL ) {
+            struct Repeater* repeater = repeaterNode->data;
+            float d = distance(message->emittedLocation, repeater->location);
+            if(0.0f < d && d < SIGNAL_RANGE_IN_M)
+                Repeater_receive_message( repeater, message );
+
+            repeaterNode = repeaterNode->next;
         }
     }
 }

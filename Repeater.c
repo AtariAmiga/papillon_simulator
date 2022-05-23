@@ -25,8 +25,9 @@ void Repeater_receive_message(struct Repeater* self, struct Message* message) {
     printf( "Repeater %s received: ", self->name );
     Message_println(message);
 
-    struct Message* message2 = Message_clone_and_increment(message);
+    struct Message* message2 = Message_clone_and_increment(message, self->location);
 
+    // todo: should not send it immediately! Should queue it then send it when runOneStep is called.
     World_queueMessage(self->owner, message2);
 }
 

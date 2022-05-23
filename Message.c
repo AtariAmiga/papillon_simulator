@@ -14,10 +14,11 @@ struct Message* Message_new(struct Location* location, const char* emitterName, 
     return self;
 }
 
-struct Message* Message_clone_and_increment(struct Message* self) {
+struct Message* Message_clone_and_increment(struct Message* self, struct Location* emitterLocation) {
     struct Message* clone = NEW(Message);
 
-    // todo: fully clone?
+    clone->emittedLocation = Location_clone(emitterLocation);
+    // ----
     clone->emitterName = self->emitterName;
     clone->text = self->text;
     clone->recipientName = self->recipientName;
@@ -28,6 +29,8 @@ struct Message* Message_clone_and_increment(struct Message* self) {
 
 void Message_println(struct Message* self) {
     assert(self != NULL );
-    printf("Message: %s '%s' > %s\n", self->emitterName, self->text, self->recipientName );
+    printf("Message ");
+    Location_print(self->emittedLocation);
+    printf(": %s '%s' > %s\n", self->emitterName, self->text, self->recipientName );
 }
 
