@@ -17,7 +17,7 @@ float distance(struct Location* a, struct Location* b) {
     return sqrtf(dx*dx + dy*dy);
 }
 
-void Location_println(struct Location* self) {
+void Location_print(struct Location* self) {
     assert( NULL != self);
     printf( "(%f, %f)", self->x, self->y);
 }
