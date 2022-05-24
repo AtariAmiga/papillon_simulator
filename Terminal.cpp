@@ -7,10 +7,9 @@
 #include <iostream>
 #include <cassert>
 
-Terminal::Terminal(const char* name, struct World* owner, float x, float y) {
-    _location = new Location(x, y);
-    _name = name;
-    _worldOwner = owner;
+Terminal::Terminal(const char* name, struct World* owner, float x, float y):
+        CommunicationNode(name, owner, x, y)
+{
 }
 
 std::ostream& operator<<(std::ostream& os, const Terminal* terminal) {

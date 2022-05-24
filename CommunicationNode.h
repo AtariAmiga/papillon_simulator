@@ -9,13 +9,19 @@ class Location;
 
 class CommunicationNode {
 protected:
+    static int _nextNodeUniqueID;
+
     std::list<Message*> _messageList;
+
+    const int _nodeUniqueID;
 
     Location* _location;
     const char* _name;
     World* _worldOwner;
 
 public:
+    CommunicationNode(const char* name, World* worldOwner, float x, float y);
+
     virtual void receiveMessage(Message *message);
     virtual void runOneStep() = 0;
 
