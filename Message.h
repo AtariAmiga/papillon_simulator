@@ -21,6 +21,7 @@ public:
 
     const char* recipientName() const { return _recipientName; };
     const Location* emittedLocation() const { return _emittedLocation; }
+    std::string messageUniqueId() const { return _messageUniqueId; }
 
     friend std::ostream& operator<<(std::ostream& os,  const Message* message);
 };

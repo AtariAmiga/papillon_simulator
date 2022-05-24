@@ -2,6 +2,7 @@
 #define TERMINAL_H_INCLUDED
 
 #include <iostream>
+#include <set>
 #include "CommunicationNode.h"
 
 class World;
@@ -18,6 +19,7 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Terminal* terminal);
 
 private:
+    std::set<std::string> _receivedMessageIds; // todo: replace by a queue, because should not be infinite in an embedded device!
     int _nextMessageNum = 1;
 };
 

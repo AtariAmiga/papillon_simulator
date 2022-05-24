@@ -32,7 +32,11 @@ void Terminal::runOneStep() {
         Message* message = _messageList.front();
         _messageList.pop_front();
 
-        if(strcmp(message->recipientName(), _name) == 0 )
-            std::cout << "'" << _name << "' received: " << message << std::endl;
+        if(strcmp(message->recipientName(), _name) == 0 ) {
+            if( _receivedMessageIds.count(message->messageUniqueId()) == 0) {
+                std::cout << "'" << _name << "' received: " << message << std::endl;
+                _receivedMessageIds.insert(message->messageUniqueId());
+            }
+        }
     }
 }
