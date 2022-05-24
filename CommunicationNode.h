@@ -14,6 +14,9 @@ public:
     Location* location;
     const char* name;
     World* worldOwner;
+
+    virtual void receiveMessage(Message *message);
+    virtual void runOneStep() = 0;
 };
 
 

@@ -10,8 +10,7 @@ class Location;
 class Repeater : public CommunicationNode {
 public:
     Repeater(const char *name, struct World* owner, float x, float y);
-    void receiveMessage(Message *message);
-    void runOneStep();
+    void runOneStep() override;
 };
 
 std::ostream &operator<<(std::ostream &os, const Repeater* repeater);

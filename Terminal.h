@@ -12,7 +12,8 @@ class Terminal : public CommunicationNode {
 public:
     Terminal(const char* name, struct World* owner, float x, float y);
     void sendMessage(const char* text, const char* recipient) const;
-    void receiveMessage(struct Message* message) const;
+
+    void runOneStep() override;
 };
 
 std::ostream &operator<<(std::ostream &os, const Terminal* terminal);

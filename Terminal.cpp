@@ -26,11 +26,12 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
     this->worldOwner->queueMessage(message);
 }
 
-void Terminal::receiveMessage(Message* message) const {
-    assert(message != nullptr);
+void Terminal::runOneStep() {
+    while( ! messageList.empty() ) {
+        Message* message = messageList.front();
+        messageList.pop_front();
 
-    if(strcmp(message->recipientName, this->name) == 0 ) { // todo: should not process now. Should queue it, then process it when runOneStep is called
-        std::cout << "'" <<  this->name << "' received: " << message << std::endl;
+        if(strcmp(message->recipientName, this->name) == 0 )
+            std::cout << "'" <<  this->name << "' received: " << message << std::endl;
     }
 }
-

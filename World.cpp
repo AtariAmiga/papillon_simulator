@@ -15,13 +15,13 @@ World::World(const char *name) {
 
 struct Terminal* World::newTerminal(const char* name, float x, float y) {
     auto* emitter = new Terminal(name, this, x, y);
-    this->terminalList.push_front(emitter);
+    this->communicationNodeList.push_front(emitter);
     return emitter;
 }
 
 struct Repeater* World::newRepeater(const char* name, float x, float y) {
     auto repeater = new Repeater(name, this, x, y);
-    this->repeaterList.push_front(repeater);
+    this->communicationNodeList.push_front(repeater);
     return repeater;
 }
 
@@ -34,22 +34,20 @@ void World::runOneStep() {
         Message* message = messageList.front();
         messageList.pop_front();
 
-        std::cout << "'" << this->_name << "' processing: " << message << std::endl;
-
-        // todo: do better? 0.0f < d means that emitter should not receive its own emitted messages (unless comes back later after being repeated)
-        // Terminals
-        for(const auto& terminal : this->terminalList) {
-            float d = locationDistance(message->emittedLocation, terminal->location);
-            if(0.0f < d && d < SIGNAL_RANGE_IN_M)
-                terminal->receiveMessage(message);
+        for(const auto& node : this->communicationNodeList) {
+            float d = locationDistance(message->emittedLocation, node->location);
+            std::cout << "'" << this->_name << " " << message->emittedLocation << " -> " << node->location << " d = " << d << " ";
+            if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
+                std::cout << " SENT" << std::endl;
+                node->receiveMessage(message);
+            } else {
+                std::cout << " same place or too far" << std::endl;
+            }
         }
+    }
 
-        // Repeaters todo: same code for Repeater and Terminal!
-        for(const auto& repeater : this->repeaterList) {
-            float d = locationDistance(message->emittedLocation, repeater->location);
-            if(0.0f < d && d < SIGNAL_RANGE_IN_M)
-                repeater->receiveMessage(message);
-        }
+    for(const auto& node: this->communicationNodeList) {
+        node->runOneStep();
     }
 }
 

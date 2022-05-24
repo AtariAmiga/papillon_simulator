@@ -7,13 +7,13 @@
 class Terminal;
 class Repeater;
 class Message;
+class CommunicationNode;
 
 class World {
 public:
     const char* _name;
     std::list<Message*> messageList;
-    std::list<Terminal*> terminalList;
-    std::list<Repeater*> repeaterList;
+    std::list<CommunicationNode*> communicationNodeList;
 
     explicit World(const char* name);
     Terminal* newTerminal(const char* name, float x, float y);

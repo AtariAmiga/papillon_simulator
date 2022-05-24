@@ -20,7 +20,7 @@ Message* Message::cloneAndIncrement(Location* emitterLocation) const {
 }
 
 std::ostream& operator<<(std::ostream &os, const Message* message) {
-    return os << "Message " << message->emittedLocation << ":"
+    return os << "Message " << message->emittedLocation << ": "
         << message->emitterName << " '" << message->text << "' " << message->recipientName;
 }
 
