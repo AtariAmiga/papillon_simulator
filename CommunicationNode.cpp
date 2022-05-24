@@ -15,3 +15,7 @@ CommunicationNode::CommunicationNode(const char* name, World* worldOwner, float 
 void CommunicationNode::receiveMessage(Message *message) {
     _messageList.push_front(message);
 }
+
+std::ostream& operator<<(std::ostream& os, const CommunicationNode* n) {
+    return os << "'" << n->_name << "' " << n->_location << " id:" << n->_nodeUniqueID;
+}

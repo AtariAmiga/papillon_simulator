@@ -12,10 +12,6 @@ Terminal::Terminal(const char* name, struct World* owner, float x, float y):
 {
 }
 
-std::ostream& operator<<(std::ostream& os, const Terminal* terminal) {
-    return os << "Terminal '" << terminal->_name << "'" << std::endl;
-}
-
 void Terminal::sendMessage(const char* text, const char* recipient) const {
     assert(text != nullptr);
     assert(recipient != nullptr);

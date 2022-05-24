@@ -10,10 +10,6 @@ Repeater::Repeater(const char *name, struct World* owner, float x, float y):
 {
 }
 
-std::ostream& operator<<(std::ostream& os, const Repeater* repeater) {
-    return os << "Repeater '" << repeater->_name << "'" << std::endl;
-}
-
 void Repeater::runOneStep() {
     while( ! _messageList.empty() ) {
         Message* message = _messageList.front();

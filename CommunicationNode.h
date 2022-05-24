@@ -2,6 +2,7 @@
 #define COMMUNICATION_NODE_INCLUDED
 
 #include <list>
+#include <iostream>
 
 class World;
 class Message;
@@ -26,7 +27,10 @@ public:
     virtual void runOneStep() = 0;
 
     const Location* location() const { return _location; }
+
+    friend std::ostream &operator<<(std::ostream &os, const CommunicationNode* n);
 };
 
+std::ostream &operator<<(std::ostream &os, const CommunicationNode* n);
 
 #endif

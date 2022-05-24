@@ -16,13 +16,9 @@ public:
 
     void runOneStep() override;
 
-    friend std::ostream &operator<<(std::ostream &os, const Terminal* terminal);
-
 private:
     std::set<std::string> _receivedMessageIds; // todo: replace by a queue, because should not be infinite in an embedded device!
     int _nextMessageNum = 1;
 };
-
-std::ostream &operator<<(std::ostream &os, const Terminal* terminal);
 
 #endif
