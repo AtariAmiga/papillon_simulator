@@ -16,6 +16,9 @@ public:
     void runOneStep() override;
 
     friend std::ostream &operator<<(std::ostream &os, const Terminal* terminal);
+
+private:
+    int _nextMessageNum = 1;
 };
 
 std::ostream &operator<<(std::ostream &os, const Terminal* terminal);

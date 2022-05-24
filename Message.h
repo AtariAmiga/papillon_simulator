@@ -12,9 +12,11 @@ private:
     const char* _text;
     const char* _recipientName;
     int _hopsCount;
+    std::string _messageUniqueId;
 
 public:
-    Message(Location* location, const char *emitterName, const char* text, const char* recipientName);
+    Message(Location *location, const char *emitterName, const char *text, const char *recipientName,
+            std::string messageUniqueId);
     Message* cloneAndIncrement(struct Location* emitterLocation) const;
 
     const char* recipientName() const { return _recipientName; };
@@ -23,6 +25,6 @@ public:
     friend std::ostream& operator<<(std::ostream& os,  const Message* message);
 };
 
-std::ostream& operator<<(std::ostream& os,  const Message* message);
+std::ostream& operator<<(std::ostream& os,  const Message* m);
 
 #endif

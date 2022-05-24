@@ -20,7 +20,9 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
-    auto message = new Message(_location, _name, text, recipient);
+    std::string messageUniqueId = std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum);
+            
+    auto message = new Message(_location, _name, text, recipient, messageUniqueId);
 
     _worldOwner->queueMessage(message);
 }
