@@ -11,6 +11,8 @@ class Repeater : public CommunicationNode {
 public:
     Repeater(const char *name, struct World* owner, float x, float y);
     void runOneStep() override;
+
+    friend std::ostream &operator<<(std::ostream &os, const Repeater* repeater);
 };
 
 std::ostream &operator<<(std::ostream &os, const Repeater* repeater);

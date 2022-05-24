@@ -14,6 +14,8 @@ public:
     void sendMessage(const char* text, const char* recipient) const;
 
     void runOneStep() override;
+
+    friend std::ostream &operator<<(std::ostream &os, const Terminal* terminal);
 };
 
 std::ostream &operator<<(std::ostream &os, const Terminal* terminal);

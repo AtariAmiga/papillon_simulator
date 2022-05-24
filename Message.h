@@ -6,15 +6,21 @@
 class Location;
 
 class Message {
-public:
-    Location* emittedLocation;
+private:
+    Location* _emittedLocation;
     const char* emitterName;
     const char* text;
-    const char* recipientName;
+    const char* _recipientName;
     int hopsCount;
 
+public:
     Message(Location* location, const char *emitterName, const char* text, const char* recipientName);
     Message* cloneAndIncrement(struct Location* emitterLocation) const;
+
+    const char* recipientName() const { return _recipientName; };
+    const Location* emittedLocation() const { return _emittedLocation; }
+
+    friend std::ostream& operator<<(std::ostream& os,  const Message* message);
 };
 
 std::ostream& operator<<(std::ostream& os,  const Message* message);

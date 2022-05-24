@@ -8,15 +8,18 @@ class Message;
 class Location;
 
 class CommunicationNode {
-public:
+protected:
     std::list<Message*> messageList;
 
-    Location* location;
+    Location* _location;
     const char* name;
     World* worldOwner;
 
+public:
     virtual void receiveMessage(Message *message);
     virtual void runOneStep() = 0;
+
+    const Location* location() const { return _location; }
 };
 
 

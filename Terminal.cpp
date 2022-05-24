@@ -8,7 +8,7 @@
 #include <cassert>
 
 Terminal::Terminal(const char* name, struct World* owner, float x, float y) {
-    this->location = new Location(x, y);
+    this->_location = new Location(x, y);
     this->name = name;
     this->worldOwner = owner;
 }
@@ -21,7 +21,7 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
-    auto message = new Message(this->location, this->name, text, recipient);
+    auto message = new Message(this->_location, this->name, text, recipient);
 
     this->worldOwner->queueMessage(message);
 }
@@ -31,7 +31,7 @@ void Terminal::runOneStep() {
         Message* message = messageList.front();
         messageList.pop_front();
 
-        if(strcmp(message->recipientName, this->name) == 0 )
+        if(strcmp(message->recipientName(), this->name) == 0 )
             std::cout << "'" <<  this->name << "' received: " << message << std::endl;
     }
 }

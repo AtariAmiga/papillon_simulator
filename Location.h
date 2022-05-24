@@ -4,13 +4,16 @@
 #include <iostream>
 
 class Location {
-public:
+private:
     float x;
     float y;
 
+public:
     Location(float x, float y);
     Location* clone() const;
 
+    friend std::ostream &operator<<(std::ostream &os, const Location* location);
+    friend float locationDistance(const Location* a, const Location* b);
 };
 
 std::ostream &operator<<(std::ostream &os, const Location* location);

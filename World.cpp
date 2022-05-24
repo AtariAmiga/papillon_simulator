@@ -35,8 +35,8 @@ void World::runOneStep() {
         messageList.pop_front();
 
         for(const auto& node : this->communicationNodeList) {
-            float d = locationDistance(message->emittedLocation, node->location);
-            std::cout << "'" << this->_name << " " << message->emittedLocation << " -> " << node->location << " d = " << d << " ";
+            float d = locationDistance(message->emittedLocation(), node->location());
+            std::cout << "'" << this->_name << "' " << message->emittedLocation() << " -> " << node->location() << " d = " << d << " ";
             if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
                 std::cout << " SENT" << std::endl;
                 node->receiveMessage(message);

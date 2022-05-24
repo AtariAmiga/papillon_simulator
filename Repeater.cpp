@@ -6,7 +6,7 @@
 #include <iostream>
 
 Repeater::Repeater(const char *name, struct World* owner, float x, float y) {
-    this->location = new Location(x, y);
+    this->_location = new Location(x, y);
     this->name = name;
     this->worldOwner = owner;
 }
@@ -20,7 +20,7 @@ void Repeater::runOneStep() {
         Message* message = messageList.front();
         messageList.pop_front();
 
-        Message* clone = message->cloneAndIncrement(this->location);
+        Message* clone = message->cloneAndIncrement(this->_location);
 
         std::cout << "'" <<  this->name << "' repeating: " << message << std::endl;
         this->worldOwner->queueMessage(clone);

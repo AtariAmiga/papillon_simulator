@@ -10,16 +10,19 @@ class Message;
 class CommunicationNode;
 
 class World {
-public:
+private:
     const char* _name;
     std::list<Message*> messageList;
     std::list<CommunicationNode*> communicationNodeList;
 
+public:
     explicit World(const char* name);
     Terminal* newTerminal(const char* name, float x, float y);
     Repeater* newRepeater(const char* name, float x, float y);
     void runOneStep();
     void queueMessage(struct Message* message);
+
+    friend std::ostream& operator<<(std::ostream &os, const World* world);
 };
 
 std::ostream& operator<<(std::ostream &os, const World* world);
