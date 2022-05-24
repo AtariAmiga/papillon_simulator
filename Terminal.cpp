@@ -10,7 +10,7 @@
 Terminal::Terminal(const char* name, struct World* owner, float x, float y) {
     this->location = new Location(x, y);
     this->name = name;
-    this->owner = owner;
+    this->worldOwner = owner;
 }
 
 std::ostream& operator<<(std::ostream& os, const Terminal* terminal) {
@@ -23,7 +23,7 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
 
     auto message = new Message(this->location, this->name, text, recipient);
 
-    this->owner->queueMessage(message);
+    this->worldOwner->queueMessage(message);
 }
 
 void Terminal::receiveMessage(Message* message) const {

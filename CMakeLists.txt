@@ -21,7 +21,7 @@ add_library(papillon_lib
         Repeater.h Repeater.cpp
         Terminal.h Terminal.cpp
         World.h World.cpp
-        )
+        CommunicationNode.cpp CommunicationNode.h)
 
 add_executable(tests
         Location-test.cpp)
