@@ -5,16 +5,16 @@
 
 Message::Message(Location* location, const char* emitterName, const char* text, const char* recipientName) {
     _emittedLocation = location->clone();
-    this->_emitterName = emitterName;
-    this->_text = text;
+    _emitterName = emitterName;
+    _text = text;
     _recipientName = recipientName;
-    this->_hopsCount = 0;
+    _hopsCount = 0;
 }
 
 Message* Message::cloneAndIncrement(Location* emitterLocation) const {
-    auto* clone = new Message(emitterLocation->clone(), this->_emitterName, this->_text, _recipientName);
+    auto* clone = new Message(emitterLocation->clone(), _emitterName, _text, _recipientName);
 
-    clone->_hopsCount = this->_hopsCount + 1;
+    clone->_hopsCount = _hopsCount + 1;
 
     return clone;
 }

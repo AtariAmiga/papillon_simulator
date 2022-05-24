@@ -3,12 +3,12 @@
 #include <iostream>
 
 Location::Location(float x, float y) {
-    this->_x = x;
-    this->_y = y;
+    _x = x;
+    _y = y;
 }
 
 Location* Location::clone() const {
-    return new Location(this->_x, this->_y);
+    return new Location(_x, _y);
 }
 
 std::ostream& operator<<(std::ostream &os, const Location* location) {

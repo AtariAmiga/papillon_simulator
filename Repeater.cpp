@@ -6,9 +6,9 @@
 #include <iostream>
 
 Repeater::Repeater(const char *name, struct World* owner, float x, float y) {
-    this->_location = new Location(x, y);
-    this->_name = name;
-    this->_worldOwner = owner;
+    _location = new Location(x, y);
+    _name = name;
+    _worldOwner = owner;
 }
 
 std::ostream& operator<<(std::ostream& os, const Repeater* repeater) {
@@ -20,10 +20,10 @@ void Repeater::runOneStep() {
         Message* message = _messageList.front();
         _messageList.pop_front();
 
-        Message* clone = message->cloneAndIncrement(this->_location);
+        Message* clone = message->cloneAndIncrement(_location);
 
-        std::cout << "'" << this->_name << "' repeating: " << message << std::endl;
-        this->_worldOwner->queueMessage(clone);
+        std::cout << "'" << _name << "' repeating: " << message << std::endl;
+        _worldOwner->queueMessage(clone);
     }
 }
 
