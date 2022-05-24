@@ -15,10 +15,18 @@ void Repeater::runOneStep() {
         Message* message = _messageList.front();
         _messageList.pop_front();
 
-        Message* clone = message->cloneAndIncrement(_location);
+        int count = _forwardedMessageCount[message->messageUniqueId()];
 
-        std::cout << "'" << _name << "' repeating: " << message << std::endl;
-        _worldOwner->queueMessage(clone);
+        if( count < 1 ) { // todo: when should it repeat the message, and when not?
+            Message *clone = message->cloneAndIncrement(_location);
+
+            std::cout << "'" << _name << "' repeating: " << message << std::endl;
+            _worldOwner->queueMessage(clone);
+
+            _forwardedMessageCount[message->messageUniqueId()] = count + 1;
+        } else {
+//            std::cout << "'" << _name << "' NOT repeating: " << message << std::endl;
+        }
     }
 }
 

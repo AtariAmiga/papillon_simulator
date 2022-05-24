@@ -2,6 +2,7 @@
 #define REPEATER_H_INCLUDED
 
 #include <iostream>
+#include <map>
 #include "CommunicationNode.h"
 
 class World;
@@ -12,6 +13,8 @@ public:
     Repeater(const char *name, struct World* owner, float x, float y);
     void runOneStep() override;
 
+private:
+    std::map<std::string, int> _forwardedMessageCount;
 };
 
 #endif
