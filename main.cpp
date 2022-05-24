@@ -17,6 +17,7 @@ int main() {
 
     w->runOneStep();
     w->runOneStep();
+    w->runOneStep();
 
     std::cout << std::flush;
     return 0;

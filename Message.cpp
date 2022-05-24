@@ -21,6 +21,6 @@ Message* Message::cloneAndIncrement(Location* emitterLocation) const {
 
 std::ostream& operator<<(std::ostream &os, const Message* message) {
     return os << "Message " << message->_emittedLocation << ": "
-        << message->emitterName << " '" << message->text << "' " << message->_recipientName;
+        << message->emitterName << " '" << message->text << "' " << message->_recipientName << " (hops: " << message->hopsCount << ")";
 }
 
