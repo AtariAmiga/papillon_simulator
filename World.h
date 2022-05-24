@@ -12,8 +12,8 @@ class CommunicationNode;
 class World {
 private:
     const char* _name;
-    std::list<Message*> messageList;
-    std::list<CommunicationNode*> communicationNodeList;
+    std::list<Message*> _messageList;
+    std::list<CommunicationNode*> _communicationNodeList;
 
 public:
     explicit World(const char* name);

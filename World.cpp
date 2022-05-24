@@ -15,26 +15,26 @@ World::World(const char *name) {
 
 struct Terminal* World::newTerminal(const char* name, float x, float y) {
     auto* emitter = new Terminal(name, this, x, y);
-    this->communicationNodeList.push_front(emitter);
+    this->_communicationNodeList.push_front(emitter);
     return emitter;
 }
 
 struct Repeater* World::newRepeater(const char* name, float x, float y) {
     auto repeater = new Repeater(name, this, x, y);
-    this->communicationNodeList.push_front(repeater);
+    this->_communicationNodeList.push_front(repeater);
     return repeater;
 }
 
 void World::queueMessage(Message* message) {
-    this->messageList.push_front( message );
+    this->_messageList.push_front(message );
 }
 
 void World::runOneStep() {
-    while( ! messageList.empty() ) {
-        Message* message = messageList.front();
-        messageList.pop_front();
+    while( ! _messageList.empty() ) {
+        Message* message = _messageList.front();
+        _messageList.pop_front();
 
-        for(const auto& node : this->communicationNodeList) {
+        for(const auto& node : this->_communicationNodeList) {
             float d = locationDistance(message->emittedLocation(), node->location());
             std::cout << "'" << this->_name << "' " << message->emittedLocation() << " -> " << node->location() << " d = " << d << " " << message;
             if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
@@ -46,7 +46,7 @@ void World::runOneStep() {
         }
     }
 
-    for(const auto& node: this->communicationNodeList) {
+    for(const auto& node: this->_communicationNodeList) {
         node->runOneStep();
     }
 }

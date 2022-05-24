@@ -9,11 +9,11 @@ class Location;
 
 class CommunicationNode {
 protected:
-    std::list<Message*> messageList;
+    std::list<Message*> _messageList;
 
     Location* _location;
-    const char* name;
-    World* worldOwner;
+    const char* _name;
+    World* _worldOwner;
 
 public:
     virtual void receiveMessage(Message *message);

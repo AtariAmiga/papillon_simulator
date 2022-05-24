@@ -5,8 +5,8 @@
 
 class Location {
 private:
-    float x;
-    float y;
+    float _x;
+    float _y;
 
 public:
     Location(float x, float y);

@@ -3,5 +3,5 @@
 
 
 void CommunicationNode::receiveMessage(Message *message) {
-    messageList.push_front(message);
+    _messageList.push_front(message);
 }

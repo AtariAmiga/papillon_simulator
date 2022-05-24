@@ -8,10 +8,10 @@ class Location;
 class Message {
 private:
     Location* _emittedLocation;
-    const char* emitterName;
-    const char* text;
+    const char* _emitterName;
+    const char* _text;
     const char* _recipientName;
-    int hopsCount;
+    int _hopsCount;
 
 public:
     Message(Location* location, const char *emitterName, const char* text, const char* recipientName);
