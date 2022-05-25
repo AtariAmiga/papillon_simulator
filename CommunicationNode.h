@@ -28,9 +28,9 @@ public:
 
     const Location& location() const { return _location; }
 
-    friend std::ostream &operator<<(std::ostream &os, const CommunicationNode* n);
+    friend std::ostream& operator<<(std::ostream &os, const CommunicationNode& n);
 };
 
-std::ostream &operator<<(std::ostream &os, const CommunicationNode* n);
+std::ostream& operator<<(std::ostream &os, const CommunicationNode& n);
 
 #endif

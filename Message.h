@@ -24,9 +24,9 @@ public:
     const Location& emittedLocation() const { return _emittedLocation; }
     std::string messageUniqueId() const { return _messageUniqueId; }
 
-    friend std::ostream& operator<<(std::ostream& os,  const Message* message);
+    friend std::ostream& operator<<(std::ostream& os, const Message& message);
 };
 
-std::ostream& operator<<(std::ostream& os,  const Message* m);
+std::ostream& operator<<(std::ostream& os,  const Message& m);
 
 #endif

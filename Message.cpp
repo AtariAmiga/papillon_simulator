@@ -21,8 +21,8 @@ Message* Message::cloneAndIncrement(const Location& emitterLocation) const {
     return clone;
 }
 
-std::ostream& operator<<(std::ostream &os, const Message* m) {
-    return os << "Msg " << m->_messageUniqueId << " " << m->_emittedLocation << ": "
-              << m->_emitterName << " '" << m->_text << "' > " << m->_recipientName << " (hops: " << m->_hopsCount << ")";
+std::ostream& operator<<(std::ostream &os, const Message& m) {
+    return os << "Msg " << m._messageUniqueId << " " << m._emittedLocation << ": "
+              << m._emitterName << " '" << m._text << "' > " << m._recipientName << " (hops: " << m._hopsCount << ")";
 }
 

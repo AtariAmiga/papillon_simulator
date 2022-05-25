@@ -49,6 +49,6 @@ void World::runOneStep() {
     }
 }
 
-std::ostream& operator<<(std::ostream &os, const World* world) {
-    return os << "World '" << world->_name << "'" << std::endl;
+std::ostream& operator<<(std::ostream &os, const World& w) {
+    return os << "World '" << w._name << "'" << std::endl;
 }

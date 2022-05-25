@@ -23,9 +23,9 @@ public:
     void runOneStep();
     void queueMessage(Message* message);
 
-    friend std::ostream& operator<<(std::ostream &os, const World* world);
+    friend std::ostream& operator<<(std::ostream &os, const World& world);
 };
 
-std::ostream& operator<<(std::ostream &os, const World* world);
+std::ostream& operator<<(std::ostream &os, const World& w);
 
 #endif

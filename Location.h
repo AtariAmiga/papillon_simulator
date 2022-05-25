@@ -12,11 +12,11 @@ public:
     Location(float x, float y);
     Location(const Location& l);
 
-    friend std::ostream &operator<<(std::ostream &os, const Location& location);
+    friend std::ostream& operator<<(std::ostream &os, const Location& location);
     friend float locationDistance(const Location &a, const Location &b);
 };
 
-std::ostream &operator<<(std::ostream &os, const Location& l);
+std::ostream& operator<<(std::ostream &os, const Location& l);
 
 float locationDistance(const Location &a, const Location &b);
 
