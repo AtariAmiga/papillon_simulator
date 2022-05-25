@@ -5,6 +5,7 @@
 #include "Location.h"
 
 #include <iostream>
+#include <memory>
 
 const float SIGNAL_RANGE_IN_M = 1000.0f;
 
@@ -13,14 +14,14 @@ World::World(const char *name) {
     _name = name;
 }
 
-struct Terminal* World::newTerminal(const char* name, float x, float y) {
-    auto* emitter = new Terminal(name, this, x, y);
-    _communicationNodeList.push_front(emitter);
-    return emitter;
+std::shared_ptr<Terminal> World::newTerminal(const char* name, float x, float y) {
+    std::shared_ptr<Terminal> terminal(new Terminal(name, this, x, y));
+    _communicationNodeList.push_front(terminal);
+    return terminal;
 }
 
-struct Repeater* World::newRepeater(const char* name, float x, float y) {
-    auto repeater = new Repeater(name, this, x, y);
+std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y) {
+    std::shared_ptr<Repeater> repeater( new Repeater(name, this, x, y));
     _communicationNodeList.push_front(repeater);
     return repeater;
 }

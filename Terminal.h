@@ -11,7 +11,7 @@ class Location;
 
 class Terminal : public CommunicationNode {
 public:
-    Terminal(const char* name, struct World* owner, float x, float y);
+    Terminal(const char* name, World* owner, float x, float y);
     void sendMessage(const char* text, const char* recipient) const;
 
     void runOneStep() override;

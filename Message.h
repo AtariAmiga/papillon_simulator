@@ -17,7 +17,7 @@ private:
 public:
     Message(Location *location, const char *emitterName, const char *text, const char *recipientName,
             std::string messageUniqueId);
-    Message* cloneAndIncrement(struct Location* emitterLocation) const;
+    Message* cloneAndIncrement(Location* emitterLocation) const;
 
     const char* recipientName() const { return _recipientName; };
     const Location* emittedLocation() const { return _emittedLocation; }

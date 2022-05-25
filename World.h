@@ -3,6 +3,7 @@
 
 #include <list>
 #include <iostream>
+#include <memory>
 
 class Terminal;
 class Repeater;
@@ -13,14 +14,14 @@ class World {
 private:
     const char* _name;
     std::list<Message*> _messageList;
-    std::list<CommunicationNode*> _communicationNodeList;
+    std::list<std::shared_ptr<CommunicationNode>> _communicationNodeList;
 
 public:
     explicit World(const char* name);
-    Terminal* newTerminal(const char* name, float x, float y);
-    Repeater* newRepeater(const char* name, float x, float y);
+    std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
+    std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
     void runOneStep();
-    void queueMessage(struct Message* message);
+    void queueMessage(Message* message);
 
     friend std::ostream& operator<<(std::ostream &os, const World* world);
 };

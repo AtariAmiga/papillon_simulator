@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cassert>
 
-Terminal::Terminal(const char* name, struct World* owner, float x, float y):
+Terminal::Terminal(const char* name, World* owner, float x, float y):
         CommunicationNode(name, owner, x, y)
 {
 }

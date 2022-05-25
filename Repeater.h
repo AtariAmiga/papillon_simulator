@@ -10,7 +10,7 @@ class Location;
 
 class Repeater : public CommunicationNode {
 public:
-    Repeater(const char *name, struct World* owner, float x, float y);
+    Repeater(const char *name, World* owner, float x, float y);
     void runOneStep() override;
 
 private:

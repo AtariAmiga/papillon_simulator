@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-Repeater::Repeater(const char *name, struct World* owner, float x, float y):
+Repeater::Repeater(const char *name, World* owner, float x, float y):
         CommunicationNode(name, owner, x, y)
 {
 }
