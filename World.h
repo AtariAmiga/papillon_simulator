@@ -13,7 +13,7 @@ class CommunicationNode;
 class World {
 private:
     const char* _name;
-    std::list<Message*> _messageList;
+    std::list<std::shared_ptr<Message>> _messageList;
     std::list<std::shared_ptr<CommunicationNode>> _communicationNodeList;
 
 public:
@@ -21,11 +21,7 @@ public:
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
     std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
     void runOneStep();
-    void queueMessage(Message* message);
-
-    friend std::ostream& operator<<(std::ostream &os, const World& world);
+    void queueMessage(const std::shared_ptr<Message>& message);
 };
-
-std::ostream& operator<<(std::ostream &os, const World& w);
 
 #endif

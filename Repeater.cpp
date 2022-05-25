@@ -12,13 +12,13 @@ Repeater::Repeater(const char *name, World* owner, float x, float y):
 
 void Repeater::runOneStep() {
     while( ! _messageList.empty() ) {
-        Message* message = _messageList.front();
+        auto message = _messageList.front();
         _messageList.pop_front();
 
         int count = _forwardedMessageCount[message->messageUniqueId()];
 
         if( count < 1 ) { // todo: when should it repeat the message, and when not?
-            Message *clone = message->cloneAndIncrement(_location);
+            auto clone = message->cloneAndIncrement(_location);
 
             std::cout << "'" << _name << "' repeating: " << message << std::endl;
             _worldOwner->queueMessage(clone);

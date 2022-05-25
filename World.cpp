@@ -26,13 +26,13 @@ std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y)
     return repeater;
 }
 
-void World::queueMessage(Message* message) {
+void World::queueMessage(const std::shared_ptr<Message>& message) {
     _messageList.push_front(message );
 }
 
 void World::runOneStep() {
     while( ! _messageList.empty() ) {
-        Message* message = _messageList.front();
+        auto message = _messageList.front();
         _messageList.pop_front();
 
         for(const auto& node : _communicationNodeList) {
@@ -47,8 +47,4 @@ void World::runOneStep() {
     for(const auto& node: _communicationNodeList) {
         node->runOneStep();
     }
-}
-
-std::ostream& operator<<(std::ostream &os, const World& w) {
-    return os << "World '" << w._name << "'" << std::endl;
 }

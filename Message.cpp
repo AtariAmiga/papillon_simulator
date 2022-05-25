@@ -13,16 +13,16 @@ Message::Message(const Location& location, const char *emitterName, const char *
     _messageUniqueId = messageUniqueId;
 }
 
-Message* Message::cloneAndIncrement(const Location& emitterLocation) const {
-    auto* clone = new Message(emitterLocation, _emitterName, _text, _recipientName, _messageUniqueId);
+std::shared_ptr<Message> Message::cloneAndIncrement(const Location& emitterLocation) const {
+    auto clone = std::make_shared<Message>(emitterLocation, _emitterName, _text, _recipientName, _messageUniqueId);
 
     clone->_hopsCount = _hopsCount + 1;
 
     return clone;
 }
 
-std::ostream& operator<<(std::ostream &os, const Message& m) {
-    return os << "Msg " << m._messageUniqueId << " " << m._emittedLocation << ": "
-              << m._emitterName << " '" << m._text << "' > " << m._recipientName << " (hops: " << m._hopsCount << ")";
+std::ostream& operator<<(std::ostream &os, const std::shared_ptr<Message>& m) {
+    return os << "Msg " << m->_messageUniqueId << " " << m->_emittedLocation << ": "
+              << m->_emitterName << " '" << m->_text << "' > " << m->_recipientName << " (hops: " << m->_hopsCount << ")";
 }
 

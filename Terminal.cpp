@@ -6,6 +6,7 @@
 #include <cstring>
 #include <iostream>
 #include <cassert>
+#include <memory>
 
 Terminal::Terminal(const char* name, World* owner, float x, float y):
         CommunicationNode(name, owner, x, y)
@@ -18,14 +19,14 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
 
     std::string messageUniqueId = std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum);
             
-    auto message = new Message(_location, _name, text, recipient, messageUniqueId);
+    auto message = std::make_shared<Message>(_location, _name, text, recipient, messageUniqueId);
 
     _worldOwner->queueMessage(message);
 }
 
 void Terminal::runOneStep() {
     while( ! _messageList.empty() ) {
-        Message* message = _messageList.front();
+        auto message = _messageList.front();
         _messageList.pop_front();
 
         if(strcmp(message->recipientName(), _name) == 0 ) {
