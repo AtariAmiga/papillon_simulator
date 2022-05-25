@@ -3,10 +3,10 @@
 
 #include <list>
 #include <iostream>
+#include "Location.h"
 
 class World;
 class Message;
-class Location;
 
 class CommunicationNode {
 protected:
@@ -16,7 +16,7 @@ protected:
 
     const int _nodeUniqueID;
 
-    Location* _location;
+    Location _location;
     const char* _name;
     World* _worldOwner;
 
@@ -26,7 +26,7 @@ public:
     virtual void receiveMessage(Message *message);
     virtual void runOneStep() = 0;
 
-    const Location* location() const { return _location; }
+    const Location& location() const { return _location; }
 
     friend std::ostream &operator<<(std::ostream &os, const CommunicationNode* n);
 };

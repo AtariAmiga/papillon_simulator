@@ -6,7 +6,7 @@ int CommunicationNode::_nextNodeUniqueID = 1;
 
 CommunicationNode::CommunicationNode(const char* name, World* worldOwner, float x, float y)
     : _nodeUniqueID(_nextNodeUniqueID++),
-      _location(new Location(x, y)),
+      _location(x, y),
       _name(name),
       _worldOwner(worldOwner)
 {

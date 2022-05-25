@@ -3,8 +3,9 @@
 
 #include <iostream>
 
-Message::Message(Location *location, const char *emitterName, const char *text, const char *recipientName, std::string messageUniqueId) {
-    _emittedLocation = location->clone();
+Message::Message(const Location& location, const char *emitterName, const char *text, const char *recipientName, std::string messageUniqueId)
+    : _emittedLocation(location)
+{
     _emitterName = emitterName;
     _text = text;
     _recipientName = recipientName;
@@ -12,8 +13,8 @@ Message::Message(Location *location, const char *emitterName, const char *text, 
     _messageUniqueId = messageUniqueId;
 }
 
-Message* Message::cloneAndIncrement(Location* emitterLocation) const {
-    auto* clone = new Message(emitterLocation->clone(), _emitterName, _text, _recipientName, _messageUniqueId);
+Message* Message::cloneAndIncrement(const Location& emitterLocation) const {
+    auto* clone = new Message(emitterLocation, _emitterName, _text, _recipientName, _messageUniqueId);
 
     clone->_hopsCount = _hopsCount + 1;
 

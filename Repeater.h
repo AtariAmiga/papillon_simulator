@@ -14,7 +14,7 @@ public:
     void runOneStep() override;
 
 private:
-    std::map<std::string, int> _forwardedMessageCount;
+    std::map<std::string, int> _forwardedMessageCount; // todo: should not be infinite in an embedded device!
 };
 
 #endif

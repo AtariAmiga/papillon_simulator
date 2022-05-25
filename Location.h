@@ -10,14 +10,14 @@ private:
 
 public:
     Location(float x, float y);
-    Location* clone() const;
+    Location(const Location& l);
 
-    friend std::ostream &operator<<(std::ostream &os, const Location* location);
-    friend float locationDistance(const Location* a, const Location* b);
+    friend std::ostream &operator<<(std::ostream &os, const Location& location);
+    friend float locationDistance(const Location &a, const Location &b);
 };
 
-std::ostream &operator<<(std::ostream &os, const Location* location);
+std::ostream &operator<<(std::ostream &os, const Location& l);
 
-float locationDistance(const Location* a, const Location* b);
+float locationDistance(const Location &a, const Location &b);
 
 #endif
