@@ -22,11 +22,13 @@ protected:
     const char* _name;
     World* _worldOwner;
 
+    time_t _nodeTime;
+
 public:
     CommunicationNode(const char* name, World* worldOwner, float x, float y);
 
     virtual void receiveMessage(const std::shared_ptr<Message>& message);
-    virtual void runOneStep() = 0;
+    virtual void runOneStep(int dtInMs) = 0;
 
     const Location& location() const { return _location; }
 

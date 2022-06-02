@@ -24,7 +24,9 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
     _worldOwner->queueMessage(message);
 }
 
-void Terminal::runOneStep() {
+void Terminal::runOneStep(int dtInMs) {
+    _nodeTime += dtInMs;
+
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();

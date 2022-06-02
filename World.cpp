@@ -31,9 +31,9 @@ void World::queueMessage(const std::shared_ptr<Message>& message) {
     _messageList.push_front(message );
 }
 
-void World::runOneStep() {
+void World::runOneStep(int dtInMs) {
     // Transmit
-    std::cout << _exactTime++ << std::endl;
+    std::cout << (_exactTime += dtInMs) << std::endl;
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();
@@ -49,8 +49,8 @@ void World::runOneStep() {
     }
 
     // Compute
-    std::cout << _exactTime++ << std::endl;
+    std::cout << (_exactTime += dtInMs) << std::endl;
     for(const auto& node: _communicationNodeList) {
-        node->runOneStep();
+        node->runOneStep(dtInMs);
     }
 }

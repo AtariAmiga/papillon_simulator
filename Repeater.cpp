@@ -9,7 +9,9 @@ Repeater::Repeater(const char *name, World* owner, float x, float y):
 {
 }
 
-void Repeater::runOneStep() {
+void Repeater::runOneStep(int dtInMs) {
+    _nodeTime += dtInMs;
+
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();

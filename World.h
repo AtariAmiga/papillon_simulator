@@ -23,7 +23,7 @@ public:
     explicit World(const char* name, time_t time);
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
     std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
-    void runOneStep();
+    void runOneStep(int dtInMs);
     void queueMessage(const std::shared_ptr<Message>& message);
 };
 

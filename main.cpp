@@ -18,7 +18,7 @@ int main() {
     t->sendMessage("Hi Vince", "Vince");
 
     for( int i = 0; i < 5; i++ ) {
-        w->runOneStep();
+        w->runOneStep(1);
         std::cout << std::flush;
     }
 

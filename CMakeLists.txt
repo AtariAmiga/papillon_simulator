@@ -24,7 +24,7 @@ add_library(papillon_lib
         CommunicationNode.cpp CommunicationNode.h)
 
 add_executable(tests
-        Location-test.cpp)
+        Location-test.cpp Message-test.cpp)
 target_link_libraries(tests
         PRIVATE Catch2::Catch2WithMain
         papillon_lib)

@@ -11,7 +11,7 @@ class Location;
 class Repeater : public CommunicationNode {
 public:
     Repeater(const char *name, World* owner, float x, float y);
-    void runOneStep() override;
+    void runOneStep(int dtInMs) override;
 
 private:
     std::map<std::string, int> _forwardedMessageCount; // todo: should not be infinite in an embedded device!

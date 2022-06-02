@@ -1,5 +1,4 @@
 #include <catch2/catch_test_macros.hpp>
-#include <io.h>
 #include <memory>
 #include "catch2/catch_approx.hpp"
 using namespace Catch::literals;
