@@ -21,6 +21,7 @@ private:
 
 public:
     explicit World(const char* name, time_t time);
+    const char* name() { return _name; }
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
     std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
     void runOneStep(int dtInMs);
