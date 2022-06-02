@@ -1,7 +1,6 @@
 #include "Message.h"
 #include "Repeater.h"
 #include "World.h"
-#include "Location.h"
 
 #include <iostream>
 
