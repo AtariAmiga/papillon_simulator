@@ -4,12 +4,14 @@
 
 #include <iostream>
 
-Repeater::Repeater(const char *name, World* owner, float x, float y):
-        CommunicationNode(name, owner, x, y)
+Repeater::Repeater(const char *name, float x, float y) :
+        CommunicationNode(name, x, y)
 {
 }
 
-void Repeater::runOneStep(int dtInMs) {
+std::list<std::shared_ptr<Message>> Repeater::runOneStep(int dtInMs) {
+    std::list<std::shared_ptr<Message>> list;
+
     _nodeTime += dtInMs;
 
     while( ! _messageList.empty() ) {
@@ -22,12 +24,13 @@ void Repeater::runOneStep(int dtInMs) {
             auto clone = message->cloneAndIncrement(_location);
 
             std::cout << "'" << _name << "' repeating: " << message << std::endl;
-            _worldOwner->queueMessage(clone);
+            list.push_front(clone);
 
             _forwardedMessageCount[message->messageUniqueId()] = count + 1;
         } else {
 //            std::cout << "'" << _name << "' NOT repeating: " << message << std::endl;
         }
     }
+    return list;
 }
 

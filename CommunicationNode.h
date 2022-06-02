@@ -20,15 +20,16 @@ protected:
 
     Location _location;
     const char* _name;
-    World* _worldOwner;
 
     time_t _nodeTime;
 
 public:
-    CommunicationNode(const char* name, World* worldOwner, float x, float y);
+    CommunicationNode(const char *name, float x, float y);
+
+    const char* name();
 
     virtual void receiveMessage(const std::shared_ptr<Message>& message);
-    virtual void runOneStep(int dtInMs) = 0;
+    virtual std::list<std::shared_ptr<Message>> runOneStep(int dtInMs) = 0;
 
     const Location& location() const { return _location; }
 

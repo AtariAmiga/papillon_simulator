@@ -16,13 +16,13 @@ World::World(const char *name, time_t time) {
 }
 
 std::shared_ptr<Terminal> World::newTerminal(const char* name, float x, float y) {
-    std::shared_ptr<Terminal> terminal(new Terminal(name, this, x, y));
+    std::shared_ptr<Terminal> terminal(new Terminal(name, x, y));
     _communicationNodeList.push_front(terminal);
     return terminal;
 }
 
 std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y) {
-    std::shared_ptr<Repeater> repeater( new Repeater(name, this, x, y));
+    std::shared_ptr<Repeater> repeater(new Repeater(name, x, y));
     _communicationNodeList.push_front(repeater);
     return repeater;
 }
@@ -51,6 +51,7 @@ void World::runOneStep(int dtInMs) {
     // Compute
     std::cout << (_exactTime += dtInMs) << std::endl;
     for(const auto& node: _communicationNodeList) {
-        node->runOneStep(dtInMs);
+        auto list = node->runOneStep(dtInMs);
+        _messageList.insert(_messageList.end(), list.begin(), list.end());
     }
 }

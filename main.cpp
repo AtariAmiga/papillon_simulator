@@ -14,8 +14,8 @@ int main() {
     w->newRepeater("R2", 900, 0);
     w->newRepeater("R3", 1200, 0);
 
-    v->sendMessage("Hi Tonio", "Tonio");
-    t->sendMessage("Hi Vince", "Vince");
+    w->queueMessage(v->emitMessage("Hi Tonio", "Tonio") );
+    w->queueMessage(t->emitMessage("Hi Vince", "Vince") );
 
     for( int i = 0; i < 5; i++ ) {
         w->runOneStep(1);

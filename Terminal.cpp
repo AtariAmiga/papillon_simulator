@@ -8,12 +8,12 @@
 #include <cassert>
 #include <memory>
 
-Terminal::Terminal(const char* name, World* owner, float x, float y):
-        CommunicationNode(name, owner, x, y)
+Terminal::Terminal(const char *name, float x, float y) :
+        CommunicationNode(name, x, y)
 {
 }
 
-void Terminal::sendMessage(const char* text, const char* recipient) const {
+std::shared_ptr<Message> Terminal::emitMessage(const char* text, const char* recipient) const {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
@@ -21,10 +21,12 @@ void Terminal::sendMessage(const char* text, const char* recipient) const {
             
     auto message = std::make_shared<Message>(_location, _name, text, recipient, messageUniqueId);
 
-    _worldOwner->queueMessage(message);
+    return message;
 }
 
-void Terminal::runOneStep(int dtInMs) {
+std::list<std::shared_ptr<Message>> Terminal::runOneStep(int dtInMs) {
+    std::list<std::shared_ptr<Message>> list;
+
     _nodeTime += dtInMs;
 
     while( ! _messageList.empty() ) {
@@ -38,4 +40,6 @@ void Terminal::runOneStep(int dtInMs) {
             }
         }
     }
+
+    return list;
 }

@@ -11,10 +11,11 @@ class Location;
 
 class Terminal : public CommunicationNode {
 public:
-    Terminal(const char* name, World* owner, float x, float y);
-    void sendMessage(const char* text, const char* recipient) const;
+    Terminal(const char *name, float x, float y);
+    // todo: rename to sendMessage, and have runOneStep return the message created
+    std::shared_ptr<Message> emitMessage(const char* text, const char* recipient) const;
 
-    void runOneStep(int dtInMs) override;
+    std::list<std::shared_ptr<Message>> runOneStep(int dtInMs) override;
 
 private:
     std::set<std::string> _receivedMessageIds; // todo: replace by a queue, because should not be infinite in an embedded device!

@@ -4,16 +4,19 @@
 
 int CommunicationNode::_nextNodeUniqueID = 1;
 
-CommunicationNode::CommunicationNode(const char* name, World* worldOwner, float x, float y)
+CommunicationNode::CommunicationNode(const char *name, float x, float y)
     : _nodeUniqueID(_nextNodeUniqueID++),
       _location(x, y),
-      _name(name),
-      _worldOwner(worldOwner)
+      _name(name)
 {
 }
 
 void CommunicationNode::receiveMessage(const std::shared_ptr<Message>& message) {
     _messageList.push_front(message);
+}
+
+const char *CommunicationNode::name() {
+    return _name;
 }
 
 std::ostream& operator<<(std::ostream& os, const std::shared_ptr<CommunicationNode>& n) {
