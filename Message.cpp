@@ -22,7 +22,7 @@ std::shared_ptr<Message> Message::cloneAndIncrement(const Location& emitterLocat
 }
 
 std::ostream& operator<<(std::ostream &os, const std::shared_ptr<Message>& m) {
-    return os << "Msg " << m->_messageUniqueId << " " << m->_emittedLocation << ": "
-              << m->_emitterName << " '" << m->_text << "' > " << m->_recipientName << " (hops: " << m->_hopsCount << ")";
+    return os << "{" << m->_emittedLocation << ": " << "Msg " << m->_messageUniqueId << " "
+              << m->_emitterName << " '" << m->_text << "' > " << m->_recipientName << " hops: " << m->_hopsCount << "}";
 }
 

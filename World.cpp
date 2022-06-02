@@ -10,8 +10,9 @@
 const float SIGNAL_RANGE_IN_M = 1000.0f;
 
 
-World::World(const char *name) {
+World::World(const char *name, time_t time) {
     _name = name;
+    _exactTime = time;
 }
 
 std::shared_ptr<Terminal> World::newTerminal(const char* name, float x, float y) {
@@ -31,19 +32,24 @@ void World::queueMessage(const std::shared_ptr<Message>& message) {
 }
 
 void World::runOneStep() {
+    // Transmit
+    std::cout << _exactTime++ << std::endl;
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();
 
+        std::cout << "'" << _name << "' " << message << " -> " << std::endl;
         for(const auto& node : _communicationNodeList) {
             float d = locationDistance(message->emittedLocation(), node->location());
             if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
-                std::cout << "'" << _name << "' " << message << " -> " << node << " d=" << d << std::endl;
+                std::cout << "\t" << node << " d=" << d << std::endl;
                 node->receiveMessage(message);
             }
         }
     }
 
+    // Compute
+    std::cout << _exactTime++ << std::endl;
     for(const auto& node: _communicationNodeList) {
         node->runOneStep();
     }

@@ -4,6 +4,7 @@
 #include <list>
 #include <iostream>
 #include <memory>
+#include <ctime>
 
 class Terminal;
 class Repeater;
@@ -16,8 +17,10 @@ private:
     std::list<std::shared_ptr<Message>> _messageList;
     std::list<std::shared_ptr<CommunicationNode>> _communicationNodeList;
 
+    time_t _exactTime;
+
 public:
-    explicit World(const char* name);
+    explicit World(const char* name, time_t time);
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
     std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
     void runOneStep();
