@@ -18,7 +18,8 @@ int main() {
     w->queueMessage(t->emitMessage("Hi Vince", "Vince") );
 
     for( int i = 0; i < 5; i++ ) {
-        w->runOneStep(1);
+        w->simulateTime(1);
+        w->runOneStep();
         std::cout << std::flush;
     }
 

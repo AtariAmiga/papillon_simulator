@@ -19,6 +19,10 @@ const char *CommunicationNode::name() {
     return _name;
 }
 
+void CommunicationNode::simulateTime(int dtInMs) {
+    _nodeTime += dtInMs;
+}
+
 std::ostream& operator<<(std::ostream& os, const std::shared_ptr<CommunicationNode>& n) {
-    return os << "{'" << n->_name << "' " << n->_location << " id:" << n->_nodeUniqueID << "}";
+    return os << "{'" << n->_nodeTime << " " << n->_name << "' " << n->_location << " id:" << n->_nodeUniqueID << "}";
 }

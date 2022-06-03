@@ -24,10 +24,8 @@ std::shared_ptr<Message> Terminal::emitMessage(const char* text, const char* rec
     return message;
 }
 
-std::list<std::shared_ptr<Message>> Terminal::runOneStep(int dtInMs) {
+std::list<std::shared_ptr<Message>> Terminal::runOneStep() {
     std::list<std::shared_ptr<Message>> list;
-
-    _nodeTime += dtInMs;
 
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
@@ -35,7 +33,7 @@ std::list<std::shared_ptr<Message>> Terminal::runOneStep(int dtInMs) {
 
         if(strcmp(message->recipientName(), _name) == 0 ) {
             if( _receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                std::cout << "'" << _name << "' received: " << message << std::endl;
+                std::cout << _nodeTime << " '" << _name << "' received: " << message << std::endl;
                 _receivedMessageIds.insert(message->messageUniqueId());
             }
         }

@@ -9,10 +9,8 @@ Repeater::Repeater(const char *name, float x, float y) :
 {
 }
 
-std::list<std::shared_ptr<Message>> Repeater::runOneStep(int dtInMs) {
+std::list<std::shared_ptr<Message>> Repeater::runOneStep() {
     std::list<std::shared_ptr<Message>> list;
-
-    _nodeTime += dtInMs;
 
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
@@ -23,7 +21,7 @@ std::list<std::shared_ptr<Message>> Repeater::runOneStep(int dtInMs) {
         if( count < 1 ) { // todo: when should it repeat the message, and when not?
             auto clone = message->cloneAndIncrement(_location);
 
-            std::cout << "'" << _name << "' repeating: " << message << std::endl;
+            std::cout << _nodeTime << " '" << _name << "' repeating: " << message << std::endl;
             list.push_front(clone);
 
             _forwardedMessageCount[message->messageUniqueId()] = count + 1;

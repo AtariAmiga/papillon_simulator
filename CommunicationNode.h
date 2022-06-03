@@ -28,8 +28,9 @@ public:
 
     const char* name();
 
+    void simulateTime(int dtInMs);
     virtual void receiveMessage(const std::shared_ptr<Message>& message);
-    virtual std::list<std::shared_ptr<Message>> runOneStep(int dtInMs) = 0;
+    virtual std::list<std::shared_ptr<Message>> runOneStep() = 0;
 
     const Location& location() const { return _location; }
 
