@@ -13,15 +13,19 @@ Terminal::Terminal(const char *name, float x, float y) :
 {
 }
 
-std::shared_ptr<TextMessage> Terminal::emitMessage(const char* text, const char* recipient) const {
+std::shared_ptr<TextMessage> Terminal::emitMessage(const char* text, const char* recipient) {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
-    std::string messageUniqueId = std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum);
+    std::string messageUniqueId = nextMessageUniqueId();
             
     auto message = std::make_shared<TextMessage>(_location, _name, text, recipient, messageUniqueId);
 
     return message;
+}
+
+std::string Terminal::nextMessageUniqueId() {
+    return std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum++);
 }
 
 std::list<std::shared_ptr<TextMessage>> Terminal::runOneStep() {

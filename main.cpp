@@ -15,6 +15,7 @@ int main() {
     w->newRepeater("R3", 1200, 0);
 
     w->queueMessage(v->emitMessage("Hi Tonio", "Tonio") );
+    w->queueMessage(v->emitMessage("Hello John", "John") );
     w->queueMessage(t->emitMessage("Hi Vince", "Vince") );
 
     for( int i = 0; i < 5; i++ ) {
