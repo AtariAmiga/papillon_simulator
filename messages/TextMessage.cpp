@@ -1,5 +1,5 @@
 #include "TextMessage.h"
-#include "Location.h"
+#include "../world/Location.h"
 
 #include <iostream>
 

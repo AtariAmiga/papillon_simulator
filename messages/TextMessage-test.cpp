@@ -1,9 +1,9 @@
-#include <catch2/catch_test_macros.hpp>
+#include "catch2/catch_test_macros.hpp"
 #include <memory>
 #include <cstring>
 
 #include "TextMessage.h"
-#include "Location.h"
+#include "../world/Location.h"
 
 TEST_CASE( "TextMessage" ) {
     auto l = std::make_unique<Location>(1, 2);

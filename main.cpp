@@ -1,6 +1,6 @@
-#include "Terminal.h"
-#include "Repeater.h"
-#include "World.h"
+#include "nodes/Terminal.h"
+#include "nodes/Repeater.h"
+#include "world/World.h"
 
 #include <iostream>
 #include <memory>

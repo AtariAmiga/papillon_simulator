@@ -1,7 +1,7 @@
 #include "Terminal.h"
-#include "World.h"
-#include "TextMessage.h"
-#include "Location.h"
+#include "../world/World.h"
+#include "../messages/TextMessage.h"
+#include "../world/Location.h"
 
 #include <cstring>
 #include <iostream>

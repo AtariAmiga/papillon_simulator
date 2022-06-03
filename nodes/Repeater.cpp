@@ -1,6 +1,6 @@
-#include "TextMessage.h"
+#include "../messages/TextMessage.h"
 #include "Repeater.h"
-#include "World.h"
+#include "../world/World.h"
 
 #include <iostream>
 

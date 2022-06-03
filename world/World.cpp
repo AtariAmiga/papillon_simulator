@@ -1,7 +1,7 @@
 #include "World.h"
-#include "TextMessage.h"
-#include "Terminal.h"
-#include "Repeater.h"
+#include "../messages/TextMessage.h"
+#include "../nodes/Terminal.h"
+#include "../nodes/Repeater.h"
 #include "Location.h"
 
 #include <iostream>

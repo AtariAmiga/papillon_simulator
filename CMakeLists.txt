@@ -16,22 +16,22 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_library(papillon_lib
-        Location.h Location.cpp
-        TextMessage.h TextMessage.cpp
-        Repeater.h Repeater.cpp
-        Terminal.h Terminal.cpp
-        World.h World.cpp
-        CommunicationNode.cpp CommunicationNode.h
-        Message.cpp Message.h
+        world/Location.h world/Location.cpp
+        messages/TextMessage.h messages/TextMessage.cpp
+        nodes/Repeater.h nodes/Repeater.cpp
+        nodes/Terminal.h nodes/Terminal.cpp
+        world/World.h world/World.cpp
+        nodes/CommunicationNode.cpp nodes/CommunicationNode.h
+        messages/Message.cpp messages/Message.h
         )
 
 add_executable(tests
-        Location-test.cpp
-        Message-test.cpp
-        TextMessage-test.cpp
-        Terminal-test.cpp
-        Repeater-test.cpp
-        World-test.h.cpp)
+        world/Location-test.cpp
+        messages/Message-test.cpp
+        messages/TextMessage-test.cpp
+        nodes/Terminal-test.cpp
+        nodes/Repeater-test.cpp
+        world/World-test.h.cpp)
 
 
 target_link_libraries(tests

@@ -1,6 +1,5 @@
 #include "CommunicationNode.h"
-#include "TextMessage.h"
-#include "Location.h"
+#include "../messages/TextMessage.h"
 
 int CommunicationNode::_nextNodeUniqueID = 1; // todo: to be replaced by the MAC ID for instance
 

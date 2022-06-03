@@ -1,7 +1,7 @@
 #ifndef COMMUNICATION_NODE_INCLUDED
 #define COMMUNICATION_NODE_INCLUDED
 
-#include "Location.h"
+#include "../world/Location.h"
 
 #include <list>
 #include <iostream>

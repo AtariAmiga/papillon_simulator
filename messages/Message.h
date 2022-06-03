@@ -1,7 +1,7 @@
 #ifndef MESSAGE_INCLUDED
 #define MESSAGE_INCLUDED
 
-#include "Location.h"
+#include "../world/Location.h"
 
 class Message {
 protected:
