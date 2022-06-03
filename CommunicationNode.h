@@ -21,7 +21,7 @@ protected:
     Location _location;
     const char* _name;
 
-    time_t _nodeTime;
+    time_t _nodeTime{};
 
 public:
     CommunicationNode(const char *name, float x, float y);
