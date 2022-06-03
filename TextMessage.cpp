@@ -4,13 +4,12 @@
 #include <iostream>
 
 TextMessage::TextMessage(const Location& location, const char *emitterName, const char *text, const char *recipientName, std::string messageUniqueId)
-    : _emittedLocation(location)
+    : Message(location, messageUniqueId)
 {
     _emitterName = emitterName;
     _text = text;
     _recipientName = recipientName;
     _hopsCount = 0;
-    _messageUniqueId = messageUniqueId;
 }
 
 std::shared_ptr<TextMessage> TextMessage::cloneAndIncrement(const Location& emitterLocation) const {
