@@ -1,5 +1,5 @@
 #include "World.h"
-#include "Message.h"
+#include "TextMessage.h"
 #include "Terminal.h"
 #include "Repeater.h"
 #include "Location.h"
@@ -27,7 +27,7 @@ std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y)
     return repeater;
 }
 
-void World::queueMessage(const std::shared_ptr<Message>& message) {
+void World::queueMessage(const std::shared_ptr<TextMessage>& message) {
     _messageList.push_front(message );
 }
 

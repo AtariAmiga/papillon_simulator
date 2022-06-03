@@ -1,5 +1,5 @@
 #include "CommunicationNode.h"
-#include "Message.h"
+#include "TextMessage.h"
 #include "Location.h"
 
 int CommunicationNode::_nextNodeUniqueID = 1;
@@ -11,7 +11,7 @@ CommunicationNode::CommunicationNode(const char *name, float x, float y)
 {
 }
 
-void CommunicationNode::receiveMessage(const std::shared_ptr<Message>& message) {
+void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& message) {
     _messageList.push_front(message);
 }
 

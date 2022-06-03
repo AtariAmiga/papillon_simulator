@@ -8,13 +8,13 @@
 #include <memory>
 
 class World;
-class Message;
+class TextMessage;
 
 class CommunicationNode {
 protected:
     static int _nextNodeUniqueID;
 
-    std::list<std::shared_ptr<Message>> _messageList;
+    std::list<std::shared_ptr<TextMessage>> _messageList;
 
     const int _nodeUniqueID;
 
@@ -29,8 +29,8 @@ public:
     const char* name();
 
     void simulateTime(int dtInMs);
-    virtual void receiveMessage(const std::shared_ptr<Message>& message);
-    virtual std::list<std::shared_ptr<Message>> runOneStep() = 0;
+    virtual void receiveMessage(const std::shared_ptr<TextMessage>& message);
+    virtual std::list<std::shared_ptr<TextMessage>> runOneStep() = 0;
 
     const Location& location() const { return _location; }
 

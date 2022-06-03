@@ -1,6 +1,6 @@
 #include "Terminal.h"
 #include "World.h"
-#include "Message.h"
+#include "TextMessage.h"
 #include "Location.h"
 
 #include <cstring>
@@ -13,19 +13,19 @@ Terminal::Terminal(const char *name, float x, float y) :
 {
 }
 
-std::shared_ptr<Message> Terminal::emitMessage(const char* text, const char* recipient) const {
+std::shared_ptr<TextMessage> Terminal::emitMessage(const char* text, const char* recipient) const {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
     std::string messageUniqueId = std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum);
             
-    auto message = std::make_shared<Message>(_location, _name, text, recipient, messageUniqueId);
+    auto message = std::make_shared<TextMessage>(_location, _name, text, recipient, messageUniqueId);
 
     return message;
 }
 
-std::list<std::shared_ptr<Message>> Terminal::runOneStep() {
-    std::list<std::shared_ptr<Message>> list;
+std::list<std::shared_ptr<TextMessage>> Terminal::runOneStep() {
+    std::list<std::shared_ptr<TextMessage>> list;
 
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();

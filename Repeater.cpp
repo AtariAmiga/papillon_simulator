@@ -1,4 +1,4 @@
-#include "Message.h"
+#include "TextMessage.h"
 #include "Repeater.h"
 #include "World.h"
 
@@ -9,8 +9,8 @@ Repeater::Repeater(const char *name, float x, float y) :
 {
 }
 
-std::list<std::shared_ptr<Message>> Repeater::runOneStep() {
-    std::list<std::shared_ptr<Message>> list;
+std::list<std::shared_ptr<TextMessage>> Repeater::runOneStep() {
+    std::list<std::shared_ptr<TextMessage>> list;
 
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();

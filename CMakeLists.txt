@@ -17,14 +17,14 @@ FetchContent_MakeAvailable(Catch2)
 
 add_library(papillon_lib
         Location.h Location.cpp
-        Message.h Message.cpp
+        TextMessage.h TextMessage.cpp
         Repeater.h Repeater.cpp
         Terminal.h Terminal.cpp
         World.h World.cpp
-        CommunicationNode.cpp CommunicationNode.h)
+        CommunicationNode.cpp CommunicationNode.h Message.cpp Message.h)
 
 add_executable(tests
-        Location-test.cpp Message-test.cpp Terminal-test.cpp Repeater-test.cpp World-test.h.cpp)
+        Location-test.cpp TextMessage-test.cpp Terminal-test.cpp Repeater-test.cpp World-test.h.cpp)
 target_link_libraries(tests
         PRIVATE Catch2::Catch2WithMain
         papillon_lib)
