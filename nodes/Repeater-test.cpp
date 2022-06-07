@@ -4,6 +4,6 @@
 # include "Repeater.h"
 
 TEST_CASE( "Repeater" ) {
-    auto r = std::make_unique<Repeater>( "R", 2, 3 );
-    REQUIRE( strcmp( "R", r->name() ) == 0 );
+    auto r = Repeater( "R", 2, 3 );
+    REQUIRE( strcmp( "R", r.name() ) == 0 );
 }

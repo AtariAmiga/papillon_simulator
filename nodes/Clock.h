@@ -2,11 +2,16 @@
 #define CLOCK_H
 
 
+#include <ctime>
+
 class Clock {
 public:
-    Clock();
+    Clock(time_t initialTime, float driftSpeedPercent);
+
+    time_t updateTime(int dtInMs);
 
 private:
+    double _timeInMsAsDouble;
     float _driftSpeedPercent;
 };
 

@@ -1,11 +1,14 @@
 #include "Clock.h"
 #include <random>
 
-// todo: make this cleaner
-std::random_device rd;
-std::mt19937 mt(rd());
-std::uniform_real_distribution<double> dist(-5.0, 5.0);
 
-Clock::Clock() {
-    _driftSpeedPercent = dist(mt);
+Clock::Clock(time_t initialTime, float driftSpeedPercent) {
+    _timeInMsAsDouble = (double) initialTime;
+    _driftSpeedPercent = driftSpeedPercent;
+}
+
+time_t Clock::updateTime(int dtInMs) {
+    _timeInMsAsDouble += ((double) dtInMs)*(1 + _driftSpeedPercent/100.0);
+
+    return (time_t) _timeInMsAsDouble;
 }
