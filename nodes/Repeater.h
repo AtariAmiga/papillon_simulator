@@ -1,5 +1,5 @@
-#ifndef REPEATER_H_INCLUDED
-#define REPEATER_H_INCLUDED
+#ifndef REPEATER_H
+#define REPEATER_H
 
 #include <iostream>
 #include <map>
@@ -17,4 +17,4 @@ private:
     std::map<std::string, int> _forwardedMessageCount; // todo: should not be infinite in an embedded device!
 };
 
-#endif
+#endif // REPEATER_H

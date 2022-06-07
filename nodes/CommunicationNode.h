@@ -1,5 +1,5 @@
-#ifndef COMMUNICATION_NODE_INCLUDED
-#define COMMUNICATION_NODE_INCLUDED
+#ifndef COMMUNICATION_NODE_H
+#define COMMUNICATION_NODE_H
 
 #include "../world/Location.h"
 
@@ -39,4 +39,4 @@ public:
 
 std::ostream& operator<<(std::ostream &os, const std::shared_ptr<CommunicationNode>& n);
 
-#endif
+#endif // COMMUNICATION_NODE_H

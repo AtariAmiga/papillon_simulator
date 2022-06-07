@@ -1,5 +1,5 @@
-#ifndef TERMINAL_H_INCLUDED
-#define TERMINAL_H_INCLUDED
+#ifndef TERMINAL_H
+#define TERMINAL_H
 
 #include <iostream>
 #include <set>
@@ -24,4 +24,4 @@ private:
     std::string nextMessageUniqueId();
 };
 
-#endif
+#endif // TERMINAL_H

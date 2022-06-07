@@ -1,5 +1,5 @@
-#ifndef TEXT_MESSAGE_H_INCLUDED
-#define TEXT_MESSAGE_H_INCLUDED
+#ifndef TEXT_MESSAGE_H
+#define TEXT_MESSAGE_H
 
 #include "Message.h"
 
@@ -24,4 +24,4 @@ public:
 
 std::ostream& operator<<(std::ostream& os,  const std::shared_ptr<TextMessage>& m);
 
-#endif // TEXT_MESSAGE_H_INCLUDED
+#endif // TEXT_MESSAGE_H

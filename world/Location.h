@@ -1,5 +1,5 @@
-#ifndef LOCATION_H_INCLUDED
-#define LOCATION_H_INCLUDED
+#ifndef LOCATION_H
+#define LOCATION_H
 
 #include <iostream>
 
@@ -20,4 +20,4 @@ std::ostream& operator<<(std::ostream &os, const Location& l);
 
 float locationDistance(const Location &a, const Location &b);
 
-#endif
+#endif // LOCATION_H

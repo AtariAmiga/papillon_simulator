@@ -1,5 +1,5 @@
-#ifndef MESSAGE_INCLUDED
-#define MESSAGE_INCLUDED
+#ifndef MESSAGE_H
+#define MESSAGE_H
 
 #include "../world/Location.h"
 
@@ -18,4 +18,4 @@ public:
 };
 
 
-#endif // MESSAGE_INCLUDED
+#endif // MESSAGE_H

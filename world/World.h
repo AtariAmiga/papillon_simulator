@@ -1,5 +1,5 @@
-#ifndef WORLD_H_INCLUDED
-#define WORLD_H_INCLUDED
+#ifndef WORLD_H
+#define WORLD_H
 
 #include <list>
 #include <iostream>
@@ -29,4 +29,4 @@ public:
     void queueMessage(const std::shared_ptr<TextMessage>& message);
 };
 
-#endif
+#endif // WORLD_H

@@ -23,7 +23,7 @@ add_library(papillon_lib
         world/World.h world/World.cpp
         nodes/CommunicationNode.cpp nodes/CommunicationNode.h
         messages/Message.cpp messages/Message.h
-        )
+        nodes/Clock.cpp nodes/Clock.h)
 
 add_executable(tests
         world/Location-test.cpp
@@ -31,7 +31,7 @@ add_executable(tests
         messages/TextMessage-test.cpp
         nodes/Terminal-test.cpp
         nodes/Repeater-test.cpp
-        world/World-test.h.cpp)
+        world/World-test.h.cpp nodes/Clock-test.cpp)
 
 
 target_link_libraries(tests
