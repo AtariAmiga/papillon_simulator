@@ -5,12 +5,6 @@
 #include "Clock.h"
 
 TEST_CASE( "Clock" ) {
-    // todo: use this
-    //    std::random_device rd;
-    //    std::mt19937 mt(rd());
-    //    std::uniform_real_distribution<double> dist(-5.0, 5.0);
-
-
     Clock clockNoDrift(0, 0);
     Clock clockDriftFuture(0, 5);
     Clock clockDriftPast(0, -6);
