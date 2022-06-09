@@ -4,6 +4,6 @@
 #include "World.h"
 
 TEST_CASE( "World" ) {
-    auto r = std::make_unique<World>( "W" );
-    REQUIRE( strcmp( "W", r->name() ) == 0 );
+    auto r = World( "W" );
+    REQUIRE( strcmp( "W", r.name() ) == 0 );
 }

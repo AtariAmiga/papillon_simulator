@@ -31,7 +31,7 @@ add_executable(tests
         messages/TextMessage-test.cpp
         nodes/Terminal-test.cpp
         nodes/Repeater-test.cpp
-        world/World-test.h.cpp Clock-test.cpp RandomGenerator-test.cpp)
+        world/World-test.cpp Clock-test.cpp RandomGenerator-test.cpp)
 
 
 target_link_libraries(tests

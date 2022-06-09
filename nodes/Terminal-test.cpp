@@ -5,7 +5,7 @@
 #include "Terminal.h"
 
 TEST_CASE( "Terminal" ) {
-    auto t = std::make_shared<Terminal>( "T", 1, 2 );
+    auto t = Terminal( "T", 1, 2 );
 
-    REQUIRE( strcmp("T", t->name()) == 0 );
+    REQUIRE( strcmp("T", t.name()) == 0 );
 }

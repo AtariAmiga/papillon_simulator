@@ -3,11 +3,10 @@
 #include <cstring>
 
 #include "Message.h"
-#include "../world/Location.h"
 
 TEST_CASE( "Message" ) {
-    auto l = std::make_unique<Location>(5, 6);
-    auto m = std::make_unique<Message>(*l, "1.2" );
+    auto l = Location(5, 6);
+    auto m = Message(l, "1.2" );
 
-    REQUIRE("1.2" == m->messageUniqueId());
+    REQUIRE("1.2" == m.messageUniqueId());
 }
