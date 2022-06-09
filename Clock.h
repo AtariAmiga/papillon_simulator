@@ -10,15 +10,17 @@ public:
 
     time_t updateTime(int dtInMs);
 
-    friend std::ostream& operator<<(std::ostream &os, Clock& c);
+    friend std::ostream& operator<<(std::ostream &os, const Clock& c);
+
+    void syncTime(time_t time);
+
+    time_t currentTime() const;
 
 private:
-    time_t _initialTime;
-    int _cumulatedDelta;
+    double _currentTime; // Kept as double, as it can drift by less than 1 ms
     float _driftSpeedPercent;
-    time_t _currentTime;
 };
 
-std::ostream& operator<<(std::ostream &os, Clock& c);
+std::ostream& operator<<(std::ostream &os, const Clock& c);
 
 #endif // CLOCK_H

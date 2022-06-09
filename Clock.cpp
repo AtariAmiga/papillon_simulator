@@ -3,19 +3,23 @@
 
 
 Clock::Clock(time_t initialTime, float driftSpeedPercent) {
-    _initialTime = initialTime;
-    _currentTime = initialTime;
-    _cumulatedDelta = 0;
+    _currentTime = (double) initialTime;
     _driftSpeedPercent = driftSpeedPercent;
-
 }
 
 time_t Clock::updateTime(int dtInMs) {
-    _cumulatedDelta += dtInMs;
-    _currentTime = _initialTime + (time_t) (_cumulatedDelta*(1 + _driftSpeedPercent / 100.0));
-    return _currentTime;
+    _currentTime += dtInMs*(1 + _driftSpeedPercent / 100.0);
+    return (time_t) _currentTime;
 }
 
-std::ostream& operator<<(std::ostream &os, Clock& c) {
-    return os << c._currentTime;
+void Clock::syncTime(time_t time) {
+    _currentTime = (double) time;
+}
+
+std::ostream& operator<<(std::ostream &os, const Clock& c) {
+    return os << c.currentTime();
+}
+
+time_t Clock::currentTime() const {
+    return (time_t) _currentTime;
 }

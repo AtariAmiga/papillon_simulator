@@ -9,15 +9,25 @@ TEST_CASE( "Clock" ) {
     Clock clockDriftFuture(0, 5);
     Clock clockDriftPast(0, -6);
 
-    REQUIRE(10 == clockNoDrift.updateTime(10) );
-    REQUIRE(10 == clockDriftFuture.updateTime(10) );
-    REQUIRE(9 == clockDriftPast.updateTime(10) );
+    SECTION("drifting") {
+        REQUIRE(10 == clockNoDrift.updateTime(10));
+        REQUIRE(10 == clockDriftFuture.updateTime(10));
+        REQUIRE(9 == clockDriftPast.updateTime(10));
 
-    REQUIRE(60 == clockNoDrift.updateTime(50) );
-    REQUIRE(63 == clockDriftFuture.updateTime(50) );
-    REQUIRE(56 == clockDriftPast.updateTime(50) );
+        REQUIRE(60 == clockNoDrift.updateTime(50));
+        REQUIRE(63 == clockDriftFuture.updateTime(50));
+        REQUIRE(56 == clockDriftPast.updateTime(50));
 
-    REQUIRE(160 == clockNoDrift.updateTime(100) );
-    REQUIRE(168 == clockDriftFuture.updateTime(100) );
-    REQUIRE(150 == clockDriftPast.updateTime(100) );
+        REQUIRE(160 == clockNoDrift.updateTime(100));
+        REQUIRE(168 == clockDriftFuture.updateTime(100));
+        REQUIRE(150 == clockDriftPast.updateTime(100));
+    }
+
+    SECTION("syncing time") {
+        REQUIRE(168 == clockDriftFuture.updateTime(160));
+
+        clockDriftFuture.syncTime((time_t) 160);
+
+        REQUIRE(160 == clockDriftFuture.currentTime());
+    }
 }
