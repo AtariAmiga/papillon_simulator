@@ -11,7 +11,8 @@ public:
     time_t updateTime(int dtInMs);
 
 private:
-    double _timeInMsAsDouble;
+    time_t _initialTime;
+    int _cumulatedDelta;
     float _driftSpeedPercent;
 };
 

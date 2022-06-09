@@ -11,13 +11,19 @@ TEST_CASE( "Clock" ) {
     //    std::uniform_real_distribution<double> dist(-5.0, 5.0);
 
 
-    Clock c(0, 0);
-    REQUIRE( 1 == c.updateTime(1) );
-    REQUIRE( 2 == c.updateTime(1) );
-    REQUIRE( 12 == c.updateTime(10) );
+    Clock clockNoDrift(0, 0);
+    Clock clockDriftFuture(0, 5);
+    Clock clockDriftPast(0, -6);
 
-    Clock cd(0, 5);
-    REQUIRE( 10 == cd.updateTime(10) );
-    REQUIRE( 60 == cd.updateTime(50) );
-    REQUIRE( 160 == cd.updateTime(100) );
+    REQUIRE(10 == clockNoDrift.updateTime(10) );
+    REQUIRE(10 == clockDriftFuture.updateTime(10) );
+    REQUIRE(9 == clockDriftPast.updateTime(10) );
+
+    REQUIRE(60 == clockNoDrift.updateTime(50) );
+    REQUIRE(63 == clockDriftFuture.updateTime(50) );
+    REQUIRE(56 == clockDriftPast.updateTime(50) );
+
+    REQUIRE(160 == clockNoDrift.updateTime(100) );
+    REQUIRE(168 == clockDriftFuture.updateTime(100) );
+    REQUIRE(150 == clockDriftPast.updateTime(100) );
 }
