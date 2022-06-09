@@ -6,7 +6,8 @@ int CommunicationNode::_nextNodeUniqueID = 1; // todo: to be replaced by the MAC
 CommunicationNode::CommunicationNode(const char *name, float x, float y)
     : _nodeUniqueID(_nextNodeUniqueID++),
       _location(x, y),
-      _name(name)
+      _name(name),
+      _nodeClock(0, 0)
 {
 }
 
@@ -19,9 +20,9 @@ const char *CommunicationNode::name() {
 }
 
 void CommunicationNode::simulateTime(int dtInMs) {
-    _nodeTime += dtInMs;
+    _nodeClock.updateTime(dtInMs);
 }
 
 std::ostream& operator<<(std::ostream& os, const std::shared_ptr<CommunicationNode>& n) {
-    return os << "{'" << n->_nodeTime << " " << n->_name << "' " << n->_location << " id:" << n->_nodeUniqueID << "}";
+    return os << "{'" << n->_nodeClock << " " << n->_name << "' " << n->_location << " id:" << n->_nodeUniqueID << "}";
 }

@@ -37,7 +37,7 @@ std::list<std::shared_ptr<TextMessage>> Terminal::runOneStep() {
 
         if(strcmp(message->recipientName(), _name) == 0 ) {
             if( _receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                std::cout << _nodeTime << " '" << _name << "' received: " << message << std::endl;
+                std::cout << _nodeClock << " '" << _name << "' received: " << message << std::endl;
                 _receivedMessageIds.insert(message->messageUniqueId());
             }
         }

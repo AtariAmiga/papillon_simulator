@@ -2,6 +2,7 @@
 #define COMMUNICATION_NODE_H
 
 #include "../world/Location.h"
+#include "Clock.h"
 
 #include <list>
 #include <iostream>
@@ -21,7 +22,7 @@ protected:
     Location _location;
     const char* _name;
 
-    time_t _nodeTime{};
+    Clock _nodeClock;
 
 public:
     CommunicationNode(const char *name, float x, float y);
