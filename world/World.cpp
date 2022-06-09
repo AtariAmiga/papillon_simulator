@@ -10,9 +10,10 @@
 const float SIGNAL_RANGE_IN_M = 1000.0f;
 
 
-World::World(const char *name, time_t time) {
-    _name = name;
-    _exactTime = time;
+World::World(const char* name):
+        _exactClock(0, 0),
+        _name(name)
+{
 }
 
 std::shared_ptr<Terminal> World::newTerminal(const char* name, float x, float y) {
@@ -32,7 +33,7 @@ void World::queueMessage(const std::shared_ptr<TextMessage>& message) {
 }
 
 void World::simulateTime(int dtInMs) {
-    _exactTime += dtInMs;
+    _exactClock.updateTime(dtInMs);
     for(const auto& node: _communicationNodeList) {
         node->simulateTime(dtInMs);
     }
@@ -40,7 +41,7 @@ void World::simulateTime(int dtInMs) {
 
 void World::runOneStep() {
     // Transmit
-    std::cout << _exactTime << std::endl;
+    std::cout << _exactClock << std::endl;
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();

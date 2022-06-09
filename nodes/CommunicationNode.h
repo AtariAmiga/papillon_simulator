@@ -2,7 +2,7 @@
 #define COMMUNICATION_NODE_H
 
 #include "../world/Location.h"
-#include "Clock.h"
+#include "../Clock.h"
 
 #include <list>
 #include <iostream>

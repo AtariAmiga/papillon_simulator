@@ -6,7 +6,7 @@
 #include <memory>
 
 int main() {
-    auto* w = new World("W", 0);
+    auto* w = new World("W");
 
     auto v = w->newTerminal("Vince", 0, 0);
     auto t = w->newTerminal("Tonio", 1500, 0);

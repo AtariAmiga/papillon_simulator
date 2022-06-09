@@ -1,6 +1,8 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "../Clock.h"
+
 #include <list>
 #include <iostream>
 #include <memory>
@@ -17,10 +19,10 @@ private:
     std::list<std::shared_ptr<TextMessage>> _messageList;
     std::list<std::shared_ptr<CommunicationNode>> _communicationNodeList;
 
-    time_t _exactTime;
+    Clock _exactClock;
 
 public:
-    explicit World(const char* name, time_t time);
+    explicit World(const char *name);
     const char* name() { return _name; }
     void simulateTime(int dtInMs);
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
