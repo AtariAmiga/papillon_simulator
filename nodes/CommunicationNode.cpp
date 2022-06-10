@@ -12,7 +12,7 @@ CommunicationNode::CommunicationNode(const char *name, float x, float y)
 }
 
 void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& message) {
-    _messageList.push_front(message);
+    _messageReceivedList.push_front(message);
 }
 
 const char *CommunicationNode::name() {

@@ -13,35 +13,39 @@ Terminal::Terminal(const char *name, float x, float y) :
 {
 }
 
-std::shared_ptr<TextMessage> Terminal::emitMessage(const char* text, const char* recipient) {
+void Terminal::newMessage(const char *text, const char *recipient) {
     assert(text != nullptr);
     assert(recipient != nullptr);
 
     std::string messageUniqueId = nextMessageUniqueId();
-            
-    auto message = std::make_shared<TextMessage>(_location, _name, text, recipient, messageUniqueId);
 
-    return message;
+    auto message = std::make_shared<TextMessage>(_location, _name, text, recipient, messageUniqueId);
+    _messageToEmitList.push_front(message);
 }
 
 std::string Terminal::nextMessageUniqueId() {
     return std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum++);
 }
 
-std::list<std::shared_ptr<TextMessage>> Terminal::runOneStep() {
-    std::list<std::shared_ptr<TextMessage>> list;
+void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
+    std::cout << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
 
-    while( ! _messageList.empty() ) {
-        auto message = _messageList.front();
-        _messageList.pop_front();
+    // Process received messages
+    while (!_messageReceivedList.empty()) {
+        auto message = _messageReceivedList.front();
+        _messageReceivedList.pop_front();
 
-        if(strcmp(message->recipientName(), _name) == 0 ) {
-            if( _receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                std::cout << _nodeClock << " '" << _name << "' received: " << message << std::endl;
+        if (strcmp(message->recipientName(), _name) == 0) {
+            if (_receivedMessageIds.count(message->messageUniqueId()) == 0) {
+                std::cout << "\treceived: " << message << std::endl;
                 _receivedMessageIds.insert(message->messageUniqueId());
             }
         }
     }
 
-    return list;
+    for (const auto &m: _messageToEmitList) {
+        std::cout << "\temitting: " << m << std::endl;
+        emittedMessageList.push_front(m);
+    }
+    _messageToEmitList.clear();
 }

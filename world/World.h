@@ -28,7 +28,6 @@ public:
     std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
     std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
     void runOneStep();
-    void queueMessage(const std::shared_ptr<TextMessage>& message);
 };
 
 #endif // WORLD_H

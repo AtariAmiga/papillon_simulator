@@ -15,7 +15,7 @@ class CommunicationNode {
 protected:
     static int _nextNodeUniqueID;
 
-    std::list<std::shared_ptr<TextMessage>> _messageList;
+    std::list<std::shared_ptr<TextMessage>> _messageReceivedList;
 
     const int _nodeUniqueID;
 
@@ -31,7 +31,7 @@ public:
 
     void simulateTime(int dtInMs);
     virtual void receiveMessage(const std::shared_ptr<TextMessage>& message);
-    virtual std::list<std::shared_ptr<TextMessage>> runOneStep() = 0;
+    virtual void runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessageList) = 0;
 
     const Location& location() const { return _location; }
 

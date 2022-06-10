@@ -28,10 +28,6 @@ std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y)
     return repeater;
 }
 
-void World::queueMessage(const std::shared_ptr<TextMessage>& message) {
-    _messageList.push_front(message );
-}
-
 void World::simulateTime(int dtInMs) {
     _exactClock.updateTime(dtInMs);
     for(const auto& node: _communicationNodeList) {
@@ -40,25 +36,27 @@ void World::simulateTime(int dtInMs) {
 }
 
 void World::runOneStep() {
+    std::cout << _exactClock << " '" << _name << "' processing:" << std::endl;
+
     // Transmit
-    std::cout << _exactClock << std::endl;
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();
 
-        std::cout << "'" << _name << "' " << message << " -> " << std::endl;
+        std::cout << "\ttransmits " << message << " -> " << std::endl;
         for(const auto& node : _communicationNodeList) {
             float d = locationDistance(message->emittedLocation(), node->location());
             if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
-                std::cout << "\t" << node << " d=" << d << std::endl;
+                std::cout << "\t\t" << node << " d=" << d << std::endl;
                 node->receiveMessage(message);
             }
         }
     }
 
     // Compute
-    for(const auto& node: _communicationNodeList) {
-        auto list = node->runOneStep();
+    for( const auto& node: _communicationNodeList) {
+        std::list<std::shared_ptr<TextMessage>> list;
+        node->runOneStep(list);
         _messageList.insert(_messageList.end(), list.begin(), list.end());
     }
 }
