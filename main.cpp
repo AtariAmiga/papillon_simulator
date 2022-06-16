@@ -1,6 +1,7 @@
 #include "nodes/Terminal.h"
 #include "nodes/Repeater.h"
 #include "world/World.h"
+#include "Logger.h"
 
 #include <iostream>
 #include <memory>
@@ -21,7 +22,7 @@ int main() {
     for( int i = 0; i < 5; i++ ) {
         w->simulateTime(1);
         w->runOneStep();
-        std::cout << std::flush;
+        logger << std::flush;
     }
 
     return 0;

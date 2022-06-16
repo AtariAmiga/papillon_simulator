@@ -18,8 +18,8 @@ class Logger: public std::ostream {
     public:
         StreamBuf(std::ostream& output, time_t& currentTime, time_t& lastTimeLogged ):
             _output(output), _currentTime(currentTime), _lastTimeLogged(lastTimeLogged)
-
         {}
+
         ~StreamBuf() override {
             if( pbase() != pptr() ) {
                 putOutput();
@@ -40,6 +40,7 @@ class Logger: public std::ostream {
             // destructor can not call virtual methods.
             if( _lastTimeLogged < _currentTime ) {
                 _lastTimeLogged = _currentTime;
+                _output << '\n';
                 _output << _currentTime;
             }
 
@@ -49,7 +50,6 @@ class Logger: public std::ostream {
         }
     };
 
-    // My Stream just uses a version of my special buffer
     StreamBuf buffer;
 
 public:
@@ -62,5 +62,6 @@ private:
     time_t _lastTimeLogged;
 };
 
+extern Logger logger;
 
 #endif // LOGGER_H

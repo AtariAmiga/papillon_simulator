@@ -2,6 +2,7 @@
 #include "../world/World.h"
 #include "../messages/TextMessage.h"
 #include "../world/Location.h"
+#include "../Logger.h"
 
 #include <cstring>
 #include <iostream>
@@ -28,7 +29,7 @@ std::string Terminal::nextMessageUniqueId() {
 }
 
 void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
-    std::cout << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
+    logger << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
 
     // Process received messages
     while (!_messageReceivedList.empty()) {
@@ -37,14 +38,14 @@ void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
 
         if (strcmp(message->recipientName(), _name) == 0) {
             if (_receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                std::cout << "\treceived: " << message << std::endl;
+                logger << "\treceived: " << message << std::endl;
                 _receivedMessageIds.insert(message->messageUniqueId());
             }
         }
     }
 
     for (const auto &m: _messageToEmitList) {
-        std::cout << "\temitting: " << m << std::endl;
+        logger << "\temitting: " << m << std::endl;
         emittedMessageList.push_front(m);
     }
     _messageToEmitList.clear();

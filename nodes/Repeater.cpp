@@ -1,6 +1,7 @@
 #include "../messages/TextMessage.h"
 #include "Repeater.h"
 #include "../world/World.h"
+#include "../Logger.h"
 
 #include <iostream>
 
@@ -11,7 +12,7 @@ Repeater::Repeater(const char *name, float x, float y) :
 
 void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
     if( ! _messageReceivedList.empty() )
-        std::cout << "'" << _name << "' " << _nodeClock << " processing:" << std::endl;
+        logger << "'" << _name << "' " << _nodeClock << " processing:" << std::endl;
 
     while( ! _messageReceivedList.empty() ) {
         auto message = _messageReceivedList.front();
@@ -22,12 +23,12 @@ void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
         if( count < 1 ) { // todo: when should it repeat the message, and when not?
             auto clone = message->cloneAndIncrement(_location);
 
-            std::cout << "\trepeating: " << message << std::endl;
+            logger << "\trepeating: " << message << std::endl;
             emittedMessageList.push_front(clone);
 
             _forwardedMessageCount[message->messageUniqueId()] = count + 1;
         } else {
-            std::cout << "\tNOT repeating (already: " << count << " times): " << message << std::endl;
+            logger << "\tNOT repeating (already: " << count << " times): " << message << std::endl;
         }
     }
 }

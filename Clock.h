@@ -16,6 +16,8 @@ public:
 
     time_t currentTime() const;
 
+    time_t toTime() const;
+
 private:
     double _currentTime; // Kept as double, as it can drift by less than 1 ms
     float _driftSpeedPercent;

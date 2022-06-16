@@ -3,6 +3,7 @@
 #include "../nodes/Terminal.h"
 #include "../nodes/Repeater.h"
 #include "Location.h"
+#include "../Logger.h"
 
 #include <iostream>
 #include <memory>
@@ -36,18 +37,19 @@ void World::simulateTime(int dtInMs) {
 }
 
 void World::runOneStep() {
-    std::cout << _exactClock << " '" << _name << "' processing:" << std::endl;
+    logger.updateTime(_exactClock.toTime());
+    logger << "'" << _name << "' processing:" << std::endl;
 
     // Transmit
     while( ! _messageList.empty() ) {
         auto message = _messageList.front();
         _messageList.pop_front();
 
-        std::cout << "\ttransmits " << message << " -> " << std::endl;
+        logger << "\ttransmits " << message << " -> " << std::endl;
         for(const auto& node : _communicationNodeList) {
             float d = locationDistance(message->emittedLocation(), node->location());
             if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
-                std::cout << "\t\t" << node << " d=" << d << std::endl;
+                logger << "\t\t" << node << " d=" << d << std::endl;
                 node->receiveMessage(message);
             }
         }

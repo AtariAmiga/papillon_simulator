@@ -23,3 +23,7 @@ std::ostream& operator<<(std::ostream &os, const Clock& c) {
 time_t Clock::currentTime() const {
     return (time_t) _currentTime;
 }
+
+time_t Clock::toTime() const {
+    return _currentTime;
+}

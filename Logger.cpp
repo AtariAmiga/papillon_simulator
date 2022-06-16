@@ -1,6 +1,8 @@
 #include "Logger.h"
 #include <iostream>
 
+Logger logger(std::cout);
+
 Logger::Logger(std::ostream& str):
     std::ostream(&buffer),
     buffer(str, _currentTime, _lastTimeLogged),
