@@ -43,24 +43,26 @@ void World::runOneStep() {
     logger.stepIn();
 
     // Transmit
-    logger << "transmitting:" << std::endl;
-    logger.stepIn();
-    while( ! _messageList.empty() ) {
-        auto message = _messageList.front();
-        _messageList.pop_front();
-
-        logger << message << " -> " << std::endl;
+    if( ! _messageList.empty() ) {
+        logger << "transmitting:" << std::endl;
         logger.stepIn();
-        for(const auto& node : _communicationNodeList) {
-            float d = locationDistance(message->emittedLocation(), node->location());
-            if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
-                logger << node << " d=" << d << std::endl;
-                node->receiveMessage(message);
+        while (!_messageList.empty()) {
+            auto message = _messageList.front();
+            _messageList.pop_front();
+
+            logger << message << " -> " << std::endl;
+            logger.stepIn();
+            for (const auto &node: _communicationNodeList) {
+                float d = locationDistance(message->emittedLocation(), node->location());
+                if (0.0f < d && d < SIGNAL_RANGE_IN_M) {
+                    logger << node << " d=" << d << std::endl;
+                    node->receiveMessage(message);
+                }
             }
+            logger.stepOut();
         }
         logger.stepOut();
     }
-    logger.stepOut();
 
     // Compute
     logger << "computing:" << std::endl;

@@ -19,7 +19,7 @@ int main() {
     v->newMessage("Hello John", "John");
     t->newMessage("Hi Vince", "Vince");
 
-    for( int i = 0; i < 5; i++ ) {
+    for( int i = 0; i < 50; i++ ) {
         w->simulateTime(1);
         w->runOneStep();
         logger << std::flush;

@@ -23,7 +23,10 @@ add_library(papillon_lib
         world/World.h world/World.cpp
         nodes/CommunicationNode.cpp nodes/CommunicationNode.h
         messages/Message.cpp messages/Message.h
-        Clock.cpp Clock.h RandomGenerator.cpp RandomGenerator.h Logger.cpp Logger.h)
+        Clock.cpp Clock.h
+        RandomGenerator.cpp RandomGenerator.h
+        Logger.cpp Logger.h
+        nodes/NodeScheduler.cpp nodes/NodeScheduler.h)
 
 add_executable(tests
         world/Location-test.cpp
@@ -31,7 +34,10 @@ add_executable(tests
         messages/TextMessage-test.cpp
         nodes/Terminal-test.cpp
         nodes/Repeater-test.cpp
-        world/World-test.cpp Clock-test.cpp RandomGenerator-test.cpp Logger-test.cpp)
+        world/World-test.cpp Clock-test.cpp
+        RandomGenerator-test.cpp
+        Logger-test.cpp
+        nodes/NodeScheduler-test.cpp)
 
 
 target_link_libraries(tests
