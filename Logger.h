@@ -12,12 +12,13 @@ class Logger: public std::ostream {
     class StreamBuf: public std::stringbuf {
     private:
         std::ostream& _output;
+        int& _indent;
         time_t& _currentTime;
         time_t& _lastTimeLogged;
 
     public:
-        StreamBuf(std::ostream& output, time_t& currentTime, time_t& lastTimeLogged ):
-            _output(output), _currentTime(currentTime), _lastTimeLogged(lastTimeLogged)
+        StreamBuf(std::ostream& output, time_t& currentTime, time_t& lastTimeLogged, int& _indent ):
+            _output(output), _currentTime(currentTime), _lastTimeLogged(lastTimeLogged), _indent(_indent)
         {}
 
         ~StreamBuf() override {
@@ -44,7 +45,7 @@ class Logger: public std::ostream {
                 _output << _currentTime;
             }
 
-            _output << '\t' <<  str();
+            _output << std::string(_indent, '\t') <<  str();
             str("");
             _output.flush();
         }
@@ -57,10 +58,15 @@ public:
 
     void updateTime(time_t t);
 
+    void stepIn();
+    void stepOut();
+
 private:
+    int _indent;
     time_t _currentTime;
     time_t _lastTimeLogged;
 };
+
 
 extern Logger logger;
 

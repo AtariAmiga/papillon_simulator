@@ -14,5 +14,9 @@ TEST_CASE( "Logger" ) {
     l.updateTime(1);
 
     l << "HELLO ";
+    l.stepIn();
     l << "WORLD" << std::endl;
+    l << "AND FRIENDS" << std::endl;
+    l.stepOut();
+    l << "BYE BYE ";
 }

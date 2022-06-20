@@ -31,6 +31,7 @@ std::string Terminal::nextMessageUniqueId() {
 void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
     logger << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
 
+    logger.stepIn();
     // Process received messages
     while (!_messageReceivedList.empty()) {
         auto message = _messageReceivedList.front();
@@ -38,15 +39,17 @@ void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
 
         if (strcmp(message->recipientName(), _name) == 0) {
             if (_receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                logger << "\treceived: " << message << std::endl;
+                logger << "received: " << message << std::endl;
                 _receivedMessageIds.insert(message->messageUniqueId());
             }
         }
     }
 
     for (const auto &m: _messageToEmitList) {
-        logger << "\temitting: " << m << std::endl;
+        logger << "emitting: " << m << std::endl;
         emittedMessageList.push_front(m);
     }
+    logger.stepOut();
+
     _messageToEmitList.clear();
 }

@@ -14,6 +14,7 @@ void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
     if( ! _messageReceivedList.empty() )
         logger << "'" << _name << "' " << _nodeClock << " processing:" << std::endl;
 
+    logger.stepIn();
     while( ! _messageReceivedList.empty() ) {
         auto message = _messageReceivedList.front();
         _messageReceivedList.pop_front();
@@ -23,13 +24,14 @@ void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
         if( count < 1 ) { // todo: when should it repeat the message, and when not?
             auto clone = message->cloneAndIncrement(_location);
 
-            logger << "\trepeating: " << message << std::endl;
+            logger << "repeating: " << message << std::endl;
             emittedMessageList.push_front(clone);
 
             _forwardedMessageCount[message->messageUniqueId()] = count + 1;
         } else {
-            logger << "\tNOT repeating (already: " << count << " times): " << message << std::endl;
+            logger << "NOT repeating (already: " << count << " times): " << message << std::endl;
         }
     }
+    logger.stepOut();
 }
 

@@ -1,7 +1,10 @@
 # Communication protocol
 - User to user
   - DONE: Communication nodes and messages
-  - Time simulation
+  - DONE: Time simulation & proper display in logs
+    - DONE: exact clock for World, potentially drifting clocks for nodes
+    - DONE: Logger including time
+    - DONE: Indent in and out
   - Exchanging-interval and sleeping-interval to reduce power consumption
     - Example: 5 seconds of exchange, then 10 of sleep
     - When a node speaks the other should listen!
