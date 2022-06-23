@@ -11,7 +11,7 @@ class Location;
 
 class Terminal : public CommunicationNode {
 public:
-    Terminal(const char *name, float x, float y);
+    Terminal(const char *name, float x, float y, int talkTimeSlot);
     void newMessage(const char* text, const char* recipient);
 
     void runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) override;

@@ -10,7 +10,7 @@ class Location;
 
 class Repeater : public CommunicationNode {
 public:
-    Repeater(const char *name, float x, float y);
+    Repeater(const char *name, float x, float y, int talkTimeSlot);
     void runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) override;
 
 private:

@@ -4,6 +4,6 @@
 # include "Repeater.h"
 
 TEST_CASE( "Repeater" ) {
-    auto r = Repeater( "R", 2, 3 );
+    auto r = Repeater("R", 2, 3, 0);
     REQUIRE( strcmp( "R", r.name() ) == 0 );
 }

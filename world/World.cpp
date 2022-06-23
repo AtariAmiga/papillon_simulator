@@ -9,7 +9,7 @@
 #include <memory>
 
 const float SIGNAL_RANGE_IN_M = 1000.0f;
-
+int n = 0;
 
 World::World(const char* name):
         _exactClock(0, 0),
@@ -18,13 +18,13 @@ World::World(const char* name):
 }
 
 std::shared_ptr<Terminal> World::newTerminal(const char* name, float x, float y) {
-    std::shared_ptr<Terminal> terminal(new Terminal(name, x, y));
+    std::shared_ptr<Terminal> terminal(new Terminal(name, x, y, (n++)%10));
     _communicationNodeList.push_front(terminal);
     return terminal;
 }
 
 std::shared_ptr<Repeater> World::newRepeater(const char* name, float x, float y) {
-    std::shared_ptr<Repeater> repeater(new Repeater(name, x, y));
+    std::shared_ptr<Repeater> repeater(new Repeater(name, x, y, (n++)%10));
     _communicationNodeList.push_front(repeater);
     return repeater;
 }

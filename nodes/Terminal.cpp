@@ -9,8 +9,8 @@
 #include <cassert>
 #include <memory>
 
-Terminal::Terminal(const char *name, float x, float y) :
-        CommunicationNode(name, x, y)
+Terminal::Terminal(const char *name, float x, float y, int talkTimeSlot) :
+        CommunicationNode(name, x, y, talkTimeSlot)
 {
 }
 
@@ -28,8 +28,15 @@ std::string Terminal::nextMessageUniqueId() {
     return std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum++);
 }
 
-void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
-    logger << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
+void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessageList) {
+    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
+
+    if( SLEEPING == state ) {
+        logger << "'" << _name << "' " << _nodeClock << " is sleeping" << std::endl;
+        return;
+    }
+
+    logger << "'" << name() << "' " << _nodeClock << " processing: (state:" << state << ")" << std::endl;
 
     logger.stepIn();
     // Process received messages
@@ -45,9 +52,11 @@ void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
         }
     }
 
-    for (const auto &m: _messageToEmitList) {
-        logger << "emitting: " << m << std::endl;
-        emittedMessageList.push_front(m);
+    if( TALKING == state ) {
+        for (const auto &m: _messageToEmitList) {
+            logger << "emitting: " << m << std::endl;
+            emittedMessageList.push_front(m);
+        }
     }
     logger.stepOut();
 

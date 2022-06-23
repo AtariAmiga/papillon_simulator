@@ -12,15 +12,13 @@ class NodeScheduler {
 public:
     NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTimeSlot, int totalTalkSlots);
 
-    NodeState updateTime(int dtInMs);
+    NodeState getState(time_t timestampInMs);
 
 private:
     int _activeTimeInMs;
     int _sleepTimeInMs;
     int _talkTimeSlot;
     int _totalTalkSlots;
-
-    time_t _timestampInMs;
 };
 
 #endif // NODESCHEDULER_H
