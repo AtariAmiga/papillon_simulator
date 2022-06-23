@@ -1,7 +1,7 @@
 #include "catch2/catch_test_macros.hpp"
 
 #include "NodeScheduler.h"
-#include "../world/Location.h"
+#include "NodeState.h"
 
 TEST_CASE( "NodeScheduler" ) {
     auto m = NodeScheduler(100, 50, 1, 10);

@@ -29,14 +29,12 @@ std::string Terminal::nextMessageUniqueId() {
 }
 
 void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessageList) {
-    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
+    const NodeState& state = _scheduler.getState(_nodeClock.currentTime());
 
-    logger << "'" << _name << "' " << _nodeClock << " " << state << " " << _messageToEmitList.size();
+    logger << "'" << _name << "' " << _nodeClock << " " << state << " " << _messageToEmitList.size() << std::endl;
 
-    if( SLEEPING == state ) {
-        logger << std::endl;
+    if( SLEEPING == state )
         return;
-    }
 
     if( ! _messageReceivedList.empty() ) {
         logger << " processing: " << std::endl;
@@ -66,5 +64,4 @@ void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessag
         logger.stepOut();
         _messageToEmitList.clear();
     }
-    logger << std::endl;
 }

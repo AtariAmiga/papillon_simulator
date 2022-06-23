@@ -11,14 +11,12 @@ Repeater::Repeater(const char *name, float x, float y, int talkTimeSlot) :
 }
 
 void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
-    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
+    const NodeState& state = _scheduler.getState(_nodeClock.currentTime());
 
-    logger << "'" << _name << "' " << _nodeClock << " " << state;
+    logger << "'" << _name << "' " << _nodeClock << " " << state << " " << _messageReceivedList.size() << std::endl;
 
-    if( SLEEPING == state ) {
-        logger << std::endl;
+    if( SLEEPING == state )
         return;
-    }
 
     if( TALKING == state ) {
         if( ! _messageReceivedList.empty() )
@@ -44,6 +42,5 @@ void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
         }
         logger.stepOut();
     }
-    logger << std::endl;
 }
 

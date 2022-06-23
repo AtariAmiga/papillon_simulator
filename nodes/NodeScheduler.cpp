@@ -14,7 +14,7 @@ NodeScheduler::NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTime
 
 }
 
-NodeState NodeScheduler::getState(time_t timestampInMs) {
+const NodeState & NodeScheduler::getState(time_t timestampInMs) const {
     const auto fullCycleTimeInMs = _activeTimeInMs + _sleepTimeInMs;
     const auto locationInCycle = (int) (timestampInMs % fullCycleTimeInMs);
 

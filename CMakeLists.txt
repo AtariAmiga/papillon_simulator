@@ -26,7 +26,7 @@ add_library(papillon_lib
         Clock.cpp Clock.h
         RandomGenerator.cpp RandomGenerator.h
         Logger.cpp Logger.h
-        nodes/NodeScheduler.cpp nodes/NodeScheduler.h)
+        nodes/NodeScheduler.cpp nodes/NodeScheduler.h nodes/NodeState.cpp nodes/NodeState.h)
 
 add_executable(tests
         world/Location-test.cpp
@@ -37,7 +37,8 @@ add_executable(tests
         world/World-test.cpp Clock-test.cpp
         RandomGenerator-test.cpp
         Logger-test.cpp
-        nodes/NodeScheduler-test.cpp)
+        nodes/NodeScheduler-test.cpp
+        nodes/NodeState-test.cpp)
 
 
 target_link_libraries(tests

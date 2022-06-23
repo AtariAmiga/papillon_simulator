@@ -15,7 +15,7 @@ CommunicationNode::CommunicationNode(const char *name, float x, float y, int tal
 }
 
 void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& message) {
-    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
+    const NodeState& state = _scheduler.getState(_nodeClock.currentTime());
     if( SLEEPING != state ) {
         _messageReceivedList.push_front(message);
     } else {
