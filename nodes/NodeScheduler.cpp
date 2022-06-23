@@ -11,7 +11,6 @@ NodeScheduler::NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTime
     _sleepTimeInMs = sleepTimeInMs;
     _talkTimeSlot = talkTimeSlot;
     _totalTalkSlots = totalTalkSlots;
-
 }
 
 const NodeState & NodeScheduler::getState(time_t timestampInMs) const {
