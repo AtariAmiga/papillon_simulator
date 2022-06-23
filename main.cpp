@@ -20,7 +20,7 @@ int main() {
     t->newMessage("Hi Vince", "Vince");
 
     for( int i = 0; i < 50; i++ ) {
-        w->simulateTime(1);
+        w->simulateTime(5);
         w->runOneStep();
         logger << std::flush;
     }

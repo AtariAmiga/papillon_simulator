@@ -12,14 +12,11 @@ NodeScheduler::NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTime
     _talkTimeSlot = talkTimeSlot;
     _totalTalkSlots = totalTalkSlots;
 
-    _timestampInMs = 0;
 }
 
-NodeState NodeScheduler::updateTime(int dtInMs) {
-    _timestampInMs += dtInMs;
-
+NodeState NodeScheduler::getState(time_t timestampInMs) {
     const auto fullCycleTimeInMs = _activeTimeInMs + _sleepTimeInMs;
-    const auto locationInCycle = (int) (_timestampInMs % fullCycleTimeInMs);
+    const auto locationInCycle = (int) (timestampInMs % fullCycleTimeInMs);
 
     if( locationInCycle < _activeTimeInMs ) {
         auto slotSize = _activeTimeInMs / _totalTalkSlots;

@@ -9,8 +9,8 @@
 #include <cassert>
 #include <memory>
 
-Terminal::Terminal(const char *name, float x, float y) :
-        CommunicationNode(name, x, y)
+Terminal::Terminal(const char *name, float x, float y, int talkTimeSlot) :
+        CommunicationNode(name, x, y, talkTimeSlot)
 {
 }
 
@@ -28,28 +28,43 @@ std::string Terminal::nextMessageUniqueId() {
     return std::to_string(_nodeUniqueID) + "." + std::to_string(_nextMessageNum++);
 }
 
-void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
-    logger << "'" << name() << "' " << _nodeClock << " processing:" << std::endl;
+void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessageList) {
+    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
 
-    logger.stepIn();
-    // Process received messages
-    while (!_messageReceivedList.empty()) {
-        auto message = _messageReceivedList.front();
-        _messageReceivedList.pop_front();
+    logger << "'" << _name << "' " << _nodeClock << " " << state << " " << _messageToEmitList.size();
 
-        if (strcmp(message->recipientName(), _name) == 0) {
-            if (_receivedMessageIds.count(message->messageUniqueId()) == 0) {
-                logger << "received: " << message << std::endl;
-                _receivedMessageIds.insert(message->messageUniqueId());
+    if( SLEEPING == state ) {
+        logger << std::endl;
+        return;
+    }
+
+    if( ! _messageReceivedList.empty() ) {
+        logger << " processing: " << std::endl;
+
+        logger.stepIn();
+        // Process received messages
+        while (!_messageReceivedList.empty()) {
+            auto message = _messageReceivedList.front();
+            _messageReceivedList.pop_front();
+
+            if (strcmp(message->recipientName(), _name) == 0) {
+                if (_receivedMessageIds.count(message->messageUniqueId()) == 0) {
+                    logger << "received: " << message << std::endl;
+                    _receivedMessageIds.insert(message->messageUniqueId());
+                }
             }
         }
+        logger.stepOut();
     }
 
-    for (const auto &m: _messageToEmitList) {
-        logger << "emitting: " << m << std::endl;
-        emittedMessageList.push_front(m);
+    if( TALKING == state ) {
+        logger.stepIn();
+        for (const auto &m: _messageToEmitList) {
+            logger << "emitting: " << m << std::endl;
+            emittedMessageList.push_front(m);
+        }
+        logger.stepOut();
+        _messageToEmitList.clear();
     }
-    logger.stepOut();
-
-    _messageToEmitList.clear();
+    logger << std::endl;
 }

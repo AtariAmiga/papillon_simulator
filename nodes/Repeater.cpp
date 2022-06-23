@@ -5,33 +5,45 @@
 
 #include <iostream>
 
-Repeater::Repeater(const char *name, float x, float y) :
-        CommunicationNode(name, x, y)
+Repeater::Repeater(const char *name, float x, float y, int talkTimeSlot) :
+        CommunicationNode(name, x, y, talkTimeSlot)
 {
 }
 
 void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) {
-    if( ! _messageReceivedList.empty() )
-        logger << "'" << _name << "' " << _nodeClock << " processing:" << std::endl;
+    const NodeState state = _scheduler.getState(_nodeClock.currentTime());
 
-    logger.stepIn();
-    while( ! _messageReceivedList.empty() ) {
-        auto message = _messageReceivedList.front();
-        _messageReceivedList.pop_front();
+    logger << "'" << _name << "' " << _nodeClock << " " << state;
 
-        int count = _forwardedMessageCount[message->messageUniqueId()];
-
-        if( count < 1 ) { // todo: when should it repeat the message, and when not?
-            auto clone = message->cloneAndIncrement(_location);
-
-            logger << "repeating: " << message << std::endl;
-            emittedMessageList.push_front(clone);
-
-            _forwardedMessageCount[message->messageUniqueId()] = count + 1;
-        } else {
-            logger << "NOT repeating (already: " << count << " times): " << message << std::endl;
-        }
+    if( SLEEPING == state ) {
+        logger << std::endl;
+        return;
     }
-    logger.stepOut();
+
+    if( TALKING == state ) {
+        if( ! _messageReceivedList.empty() )
+            logger << "no message to repeat";
+
+        logger.stepIn();
+        while (!_messageReceivedList.empty()) {
+            auto message = _messageReceivedList.front();
+            _messageReceivedList.pop_front();
+
+            int count = _forwardedMessageCount[message->messageUniqueId()];
+
+            if (count < 1) { // todo: when should it repeat the message, and when not?
+                auto clone = message->cloneAndIncrement(_location);
+
+                logger << "repeating: " << message << std::endl;
+                emittedMessageList.push_front(clone);
+
+                _forwardedMessageCount[message->messageUniqueId()] = count + 1;
+            } else {
+                logger << "NOT repeating (already: " << count << " times): " << message << std::endl;
+            }
+        }
+        logger.stepOut();
+    }
+    logger << std::endl;
 }
 

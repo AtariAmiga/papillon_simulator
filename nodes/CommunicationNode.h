@@ -3,6 +3,7 @@
 
 #include "../world/Location.h"
 #include "../Clock.h"
+#include "NodeScheduler.h"
 
 #include <list>
 #include <iostream>
@@ -23,9 +24,10 @@ protected:
     const char* _name;
 
     Clock _nodeClock;
+    NodeScheduler _scheduler;
 
 public:
-    CommunicationNode(const char *name, float x, float y);
+    CommunicationNode(const char *name, float x, float y, int talkTimeSlot);
 
     const char* name();
 
