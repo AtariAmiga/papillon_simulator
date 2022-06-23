@@ -19,9 +19,6 @@ void Repeater::runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessag
         return;
 
     if( TALKING == state ) {
-        if( ! _messageReceivedList.empty() )
-            logger << "no message to repeat";
-
         logger.stepIn();
         while (!_messageReceivedList.empty()) {
             auto message = _messageReceivedList.front();

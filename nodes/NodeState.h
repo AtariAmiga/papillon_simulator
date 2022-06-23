@@ -10,7 +10,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os,  const NodeState& n);
 
 private:
-    explicit NodeState(const NodeState&) {}
+    explicit NodeState(const NodeState&) {}  // to prevent copying those constants, so that != an == operators can work by comparing addresses
 
     const char *_name;
 };
