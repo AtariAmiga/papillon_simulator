@@ -4,10 +4,13 @@
 #include "NodeState.h"
 #include "../RandomGenerator.h"
 
+#include <list>
+#include <memory>
+
 TEST_CASE( "NodeScheduler" ) {
     SECTION("find talk slot") {
         // todo: transform this algorithm experimentation in real testable code
-        RandomGenerator rg1(0, 3);
+        RandomGenerator rg_0_3(0, 3);
 
         class Node {
         public:
@@ -16,9 +19,18 @@ TEST_CASE( "NodeScheduler" ) {
             const char *_name;
             NodeScheduler _scheduler;
             int _receivedMsg;
+
+            static void print(time_t timestamp, std::list<Node>& nodes) {
+                for (Node& node: nodes) {
+                    auto &state = node._scheduler.getState(timestamp);
+                    std::cout << "'" << node._name << "' " << state << " " << node._scheduler.talkTimeSlot() << " ";
+                    std::cout << "#" << node._receivedMsg << "\t";
+                }
+                std::cout << std::endl << std::flush;
+            }
         };
 
-        Node nodes[] = {Node("A", 0), Node("B", 0), Node("C", 0), Node("D", 0)};
+        std::list<Node> nodes{Node("A", 0), Node("B", 0), Node("C", 0), Node("D", 0)};
         for( time_t timestamp = 0; timestamp < 500; timestamp += 10 ) {
             // Nodes always emit messages when they are allowed to talk
             for (const Node& node: nodes) {
@@ -35,12 +47,7 @@ TEST_CASE( "NodeScheduler" ) {
 
             // Display current state
             std::cout << timestamp << "\t";
-            for (Node& node: nodes) {
-                auto &state = node._scheduler.getState(timestamp);
-                std::cout << "'" << node._name << "' " << state << " " << node._scheduler.talkTimeSlot() << " ";
-                std::cout << "#" << node._receivedMsg << "\t";
-            }
-            std::cout << std::endl << std::flush;
+            Node::print( timestamp, nodes );
 
             // Algorithm to find a talking slot: randomly move (or not) to a next slot
             // if I am receiving a message while I am in a talking state
@@ -51,7 +58,7 @@ TEST_CASE( "NodeScheduler" ) {
                     if( node._receivedMsg ) {
                         // If all nodes start at 0, all talk at the same time, increasing talk slot by one will not work
                         // hence some random like decisions
-                        node._scheduler.changeToNextTalkSlot((int) rg1.get());
+                        node._scheduler.changeToNextTalkSlot((int) rg_0_3.get());
                     }
                 }
                 if( state != SLEEPING )
@@ -60,12 +67,7 @@ TEST_CASE( "NodeScheduler" ) {
 
             // Display next state
             std::cout << "\t";
-            for (Node& node: nodes) {
-                auto &state = node._scheduler.getState(timestamp);
-                std::cout << "'" << node._name << "' " << state << " " << node._scheduler.talkTimeSlot() << " ";
-                std::cout << "#" << node._receivedMsg << "\t";
-            }
-            std::cout << std::endl << std::flush;
+            Node::print( timestamp, nodes );
         }
     }
     SECTION("cycling") {
