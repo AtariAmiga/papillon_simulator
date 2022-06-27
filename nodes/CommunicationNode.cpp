@@ -16,10 +16,13 @@ CommunicationNode::CommunicationNode(const char *name, float x, float y, int tal
 
 void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& message) {
     const NodeState& state = _scheduler.getState(_nodeClock.currentTime());
-    if( SLEEPING != state ) {
-        _messageReceivedList.push_front(message);
+    if( SLEEPING == state ) {
+        logger << "'" << _name << "' is SLEEPING, so dropped " << message << std::endl;
     } else {
-        logger << "'" << _name << "' is SLEEPING so dropped " << message << std::endl;
+        _messageReceivedList.push_front(message);
+
+        if( TALKING == state )
+            _scheduler.changeToNextTalkSlot(0);
     }
 }
 
