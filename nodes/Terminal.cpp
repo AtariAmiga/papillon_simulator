@@ -37,8 +37,6 @@ void Terminal::runOneStep(std::list<std::shared_ptr<TextMessage>>& emittedMessag
         return;
 
     if( ! _messageReceivedList.empty() ) {
-        logger << " processing: " << std::endl;
-
         logger.stepIn();
         // Process received messages
         while (!_messageReceivedList.empty()) {
