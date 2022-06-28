@@ -14,20 +14,20 @@ class TextMessage;
 class CommunicationNode;
 
 class World {
+public:
+    explicit World(const char *name);
+    const char* name() { return _name; }
+    time_t simulateTime(int dtInMs);
+    void addCommunicationNode(CommunicationNode *node);
+
+    void runOneStep();
+
 private:
     const char* _name;
     std::list<std::shared_ptr<TextMessage>> _messageList;
     std::list<std::shared_ptr<CommunicationNode>> _communicationNodeList;
 
     Clock _exactClock;
-
-public:
-    explicit World(const char *name);
-    const char* name() { return _name; }
-    void simulateTime(int dtInMs);
-    std::shared_ptr<Terminal> newTerminal(const char* name, float x, float y);
-    std::shared_ptr<Repeater> newRepeater(const char* name, float x, float y);
-    void runOneStep();
 };
 
 #endif // WORLD_H

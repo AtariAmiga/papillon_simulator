@@ -27,8 +27,10 @@ const NodeState & NodeScheduler::getState(time_t timestampInMs) const {
     return SLEEPING;
 }
 
-void NodeScheduler::changeToNextTalkSlot(int i) {
+int NodeScheduler::changeToNextTalkSlot(int i) {
     _talkTimeSlot += i;
     if( _talkTimeSlot == _totalTalkSlots )
         _talkTimeSlot = 0;
+
+    return _talkTimeSlot;
 }

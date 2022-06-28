@@ -1,8 +1,10 @@
 #include "CommunicationNode.h"
 #include "../messages/TextMessage.h"
 #include "../Logger.h"
+#include "../RandomGenerator.h"
 
 int CommunicationNode::_nextNodeUniqueID = 1; // todo: to be replaced by the MAC ID for instance
+RandomGenerator rg_0_3(0, 3);
 
 CommunicationNode::CommunicationNode(const char *name, float x, float y, int talkTimeSlot)
     : _nodeUniqueID(_nextNodeUniqueID++),
@@ -21,12 +23,14 @@ void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& messa
     } else {
         _messageReceivedList.push_front(message);
 
-        if( TALKING == state )
-            _scheduler.changeToNextTalkSlot(0);
+        if( TALKING == state ) {
+            int newTalkSlot = _scheduler.changeToNextTalkSlot((int) rg_0_3.get());
+            logger << "'" << _name << "' received a message while in " << state << " state, so switched to " << newTalkSlot << " talk slot" << std::endl;
+        }
     }
 }
 
-const char *CommunicationNode::name() {
+const char* CommunicationNode::name() {
     return _name;
 }
 
