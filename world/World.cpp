@@ -1,7 +1,6 @@
 #include "World.h"
 #include "../messages/TextMessage.h"
 #include "../nodes/Terminal.h"
-#include "../nodes/Repeater.h"
 #include "Location.h"
 #include "../Logger.h"
 
@@ -31,9 +30,21 @@ time_t World::simulateTime(int dtInMs) {
 
 void World::runOneStep() {
     logger.updateTime(_exactClock.toTime());
-    logger << "'" << _name << "' processing:" << std::endl;
 
+    logger << "'" << _name << "' processing:" << std::endl;
     logger.stepIn();
+
+    // Compute first, so messages can be emitted then transmitted in the same timeslot
+    // so that nodes can change talk slot if they receive a message while they
+    // are in the talking state
+    logger << "computing:" << std::endl;
+    logger.stepIn();
+    for( const auto& node: _communicationNodeList) {
+        std::list<std::shared_ptr<TextMessage>> list;
+        node->runOneStep(list);
+        _messageList.insert(_messageList.end(), list.begin(), list.end());
+    }
+    logger.stepOut();
 
     // Transmit
     if( ! _messageList.empty() ) {
@@ -56,16 +67,6 @@ void World::runOneStep() {
         }
         logger.stepOut();
     }
-
-    // Compute
-    logger << "computing:" << std::endl;
-    logger.stepIn();
-    for( const auto& node: _communicationNodeList) {
-        std::list<std::shared_ptr<TextMessage>> list;
-        node->runOneStep(list);
-        _messageList.insert(_messageList.end(), list.begin(), list.end());
-    }
-    logger.stepOut();
 
     logger.stepOut();
 }

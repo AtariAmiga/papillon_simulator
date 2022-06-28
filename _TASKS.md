@@ -12,10 +12,10 @@
         - Example: during the 5 seconds, 10 talking time slices of 500 ms each
         - DONE: Cannot know who is around when booting => Start with round-robin algorithm depending on MAC ID: should reduce collision probability
   - Find talk slot automatically 
-    -By listening to other nodes, chose a talking time slice which is different from one of the surrounding nodes (meaning: hop <= 2 for example)
-      - Remember times used by surrounding nodes
-      - If there is a collision, one of the two (or three?) nodes should use another slice
-    - What about the Terminals that can move around?
+    - DONE: By listening to other nodes, chose a talking time slice which is different from one of the surrounding nodes (meaning: hop <= 2 for example)
+    - v2, improvements
+      - Have the minimum number of nodes to change timeslot
+      - What about the Terminals that can move around? Different range for Terminals & Repeaters? Or fixed slot for Terminals <> from Repeaters?
   - Signal collision when two nodes talk at the same time in the same area
   - Time sync and drift of communication nodes
     - How many times per day?

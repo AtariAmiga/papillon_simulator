@@ -16,6 +16,8 @@ public:
 
     void runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) override;
 
+    inline size_t messagesToEmit() const {return _messageToEmitList.size();}
+
 private:
     std::list<std::shared_ptr<TextMessage>> _messageToEmitList;
     std::set<std::string> _receivedMessageIds; // todo: replace by a queue, because should not be infinite in an embedded device!

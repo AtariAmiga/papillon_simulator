@@ -25,7 +25,7 @@ void CommunicationNode::receiveMessage(const std::shared_ptr<TextMessage>& messa
 
         if( TALKING == state ) {
             int newTalkSlot = _scheduler.changeToNextTalkSlot((int) rg_0_3.get());
-            logger << "'" << _name << "' received a message while in " << state << " state, so switched to " << newTalkSlot << " talk slot" << std::endl;
+            logger << "'" << _name << "' received a message while in " << state << " state, so switched to talk slot #" << newTalkSlot << std::endl;
         }
     }
 }
