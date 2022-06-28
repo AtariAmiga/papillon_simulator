@@ -5,7 +5,8 @@
 #include "Terminal.h"
 
 TEST_CASE( "Terminal" ) {
-    auto t = Terminal("T", 1, 2, 0);
+    SchedulerConfiguration sc;
+    auto t = Terminal("T", 1, 2, sc, 0);
 
     REQUIRE( strcmp("T", t.name()) == 0 );
 }

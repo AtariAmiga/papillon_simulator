@@ -2,11 +2,12 @@
 #define NODESCHEDULER_H
 
 #include "NodeState.h"
+#include "SchedulerConfiguration.h"
 #include <iostream>
 
 class NodeScheduler {
 public:
-    NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTimeSlot, int totalTalkSlots);
+    NodeScheduler(const SchedulerConfiguration& sc, int talkTimeSlot);
 
     const NodeState & getState(time_t timestampInMs) const;
     inline int talkTimeSlot() const { return _talkTimeSlot; }

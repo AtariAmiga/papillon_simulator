@@ -6,12 +6,12 @@
 int CommunicationNode::_nextNodeUniqueID = 1; // todo: to be replaced by the MAC ID for instance
 RandomGenerator rg_0_3(0, 3);
 
-CommunicationNode::CommunicationNode(const char *name, float x, float y, int talkTimeSlot)
+CommunicationNode::CommunicationNode(const char *name, float x, float y, const SchedulerConfiguration& sc, int talkTimeSlot)
     : _nodeUniqueID(_nextNodeUniqueID++),
       _location(x, y),
       _name(name),
       _nodeClock(0, 0),
-      _scheduler(100, 50, talkTimeSlot, 10)
+      _scheduler(sc, talkTimeSlot)
 {
     std::cout << "CommunicationNode:" << name << " " << talkTimeSlot << std::endl;
 }

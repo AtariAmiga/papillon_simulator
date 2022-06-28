@@ -9,8 +9,8 @@
 #include <cassert>
 #include <memory>
 
-Terminal::Terminal(const char *name, float x, float y, int talkTimeSlot) :
-        CommunicationNode(name, x, y, talkTimeSlot)
+Terminal::Terminal(const char *name, float x, float y, const SchedulerConfiguration& sc, int talkTimeSlot) :
+        CommunicationNode(name, x, y, sc, talkTimeSlot)
 {
 }
 

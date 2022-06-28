@@ -1,16 +1,17 @@
 #include <ctime>
 #include "NodeScheduler.h"
 
-NodeScheduler::NodeScheduler(int activeTimeInMs, int sleepTimeInMs, int talkTimeSlot, int totalTalkSlots) {
+NodeScheduler::NodeScheduler(const SchedulerConfiguration& sc, int talkTimeSlot) {
     //   activeTimeInMs                   sleepTimeInMs
     // ++++++++++++++----------------------------------------------
     // \/\/\/\/\/\/\/ totalTalkSlots, here: 7
     //   ^^ talkTimeSlot, here #1 (first is #0)
 
-    _activeTimeInMs = activeTimeInMs;
-    _sleepTimeInMs = sleepTimeInMs;
+    _activeTimeInMs = sc.activeTimeInMs;
+    _sleepTimeInMs = sc.sleepTimeInMs;
+    _totalTalkSlots = sc.totalTalkSlots;
+
     _talkTimeSlot = talkTimeSlot;
-    _totalTalkSlots = totalTalkSlots;
 }
 
 const NodeState & NodeScheduler::getState(time_t timestampInMs) const {

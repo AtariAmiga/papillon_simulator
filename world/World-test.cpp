@@ -13,10 +13,11 @@ TEST_CASE( "World" ) {
     SECTION("find talking slot") {
         World w("W");
 
-        auto *a = new Terminal("A", 0.0, 0.0, 0);
-        auto *b = new Terminal("B", 1.0, 0.0, 0);
-        auto *c = new Terminal("C", 1.0, 1.0, 0);
-        auto *d = new Terminal("D", 0.0, 1.0, 0);
+        SchedulerConfiguration sc;
+        auto *a = new Terminal("A", 0.0, 0.0, sc, 0);
+        auto *b = new Terminal("B", 1.0, 0.0, sc, 0);
+        auto *c = new Terminal("C", 1.0, 1.0, sc, 0);
+        auto *d = new Terminal("D", 0.0, 1.0, sc, 0);
         Terminal* terminals[] = {a, b, c, d};
         for( auto t : terminals )
             w.addCommunicationNode(t);

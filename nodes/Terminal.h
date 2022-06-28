@@ -4,6 +4,7 @@
 #include <iostream>
 #include <set>
 #include "CommunicationNode.h"
+#include "SchedulerConfiguration.h"
 
 class World;
 class TextMessage;
@@ -11,7 +12,7 @@ class Location;
 
 class Terminal : public CommunicationNode {
 public:
-    Terminal(const char *name, float x, float y, int talkTimeSlot);
+    Terminal(const char *name, float x, float y, const SchedulerConfiguration& sc, int talkTimeSlot);
     void newMessage(const char* text, const char* recipient);
 
     void runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) override;

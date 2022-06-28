@@ -27,7 +27,7 @@ add_library(papillon_lib
         RandomGenerator.cpp RandomGenerator.h
         Logger.cpp Logger.h
         nodes/NodeScheduler.cpp nodes/NodeScheduler.h
-        nodes/NodeState.cpp nodes/NodeState.h)
+        nodes/NodeState.cpp nodes/NodeState.h nodes/SchedulerConfiguration.cpp nodes/SchedulerConfiguration.h)
 
 add_executable(tests
         world/Location-test.cpp

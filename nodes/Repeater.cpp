@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-Repeater::Repeater(const char *name, float x, float y, int talkTimeSlot) :
-        CommunicationNode(name, x, y, talkTimeSlot)
+Repeater::Repeater(const char *name, float x, float y, const SchedulerConfiguration& sc, int talkTimeSlot) :
+        CommunicationNode(name, x, y, sc, talkTimeSlot)
 {
 }
 

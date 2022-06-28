@@ -5,13 +5,14 @@ TEST_CASE( "CommunicationNode" ) {
     SECTION("instanciation") {
         class Node : public CommunicationNode {
         public:
-            explicit Node(const char *name)
-                    : CommunicationNode(name, 0, 0, 0) {}
+            explicit Node(const char *name, const SchedulerConfiguration& sc)
+                    : CommunicationNode(name, 0, 0, sc, 0) {}
 
             void runOneStep(std::list<std::shared_ptr<TextMessage>> &emittedMessageList) override {
             }
         };
 
-        Node node("N");
+        SchedulerConfiguration sc;
+        Node node("N", sc);
     }
 }

@@ -14,7 +14,9 @@ TEST_CASE( "NodeScheduler" ) {
 
         class Node {
         public:
-            explicit Node(const char *name, int talkTimeSlot) : _name(name), _scheduler(100, 50, talkTimeSlot, 10), _receivedMsg(0) {}
+            explicit Node(const char *name, const SchedulerConfiguration& sc, int talkTimeSlot)
+                : _name(name), _scheduler(sc, talkTimeSlot), _receivedMsg(0)
+            {}
 
             const char *_name;
             NodeScheduler _scheduler;
@@ -30,7 +32,8 @@ TEST_CASE( "NodeScheduler" ) {
             }
         };
 
-        std::list<Node> nodes{Node("A", 0), Node("B", 0), Node("C", 0), Node("D", 0)};
+        SchedulerConfiguration sc;
+        std::list<Node> nodes{Node("A", sc, 0), Node("B", sc, 0), Node("C", sc, 0), Node("D", sc, 0)};
         for( time_t timestamp = 0; timestamp < 500; timestamp += 10 ) {
             // Nodes always emit messages when they are allowed to talk
             for (const Node& node: nodes) {
@@ -71,7 +74,8 @@ TEST_CASE( "NodeScheduler" ) {
         }
     }
     SECTION("cycling") {
-        auto m = NodeScheduler(100, 50, 1, 10);
+        SchedulerConfiguration sc;
+        auto m = NodeScheduler(sc, 1);
         time_t time = 0;
         //---------------------------------------------
         // Cycle 1
