@@ -11,7 +11,7 @@ public:
 
     const NodeState & getState(time_t timestampInMs) const;
     inline int talkTimeSlot() const { return _talkTimeSlot; }
-    int changeToNextTalkSlot(int i);
+    int changeToNextTalkSlot(int delta);
 
 private:
     int _activeTimeInMs;
