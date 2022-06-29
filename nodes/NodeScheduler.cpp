@@ -7,9 +7,9 @@ NodeScheduler::NodeScheduler(const SchedulerConfiguration& sc, int talkTimeSlot)
     // \/\/\/\/\/\/\/ totalTalkSlots, here: 7
     //   ^^ talkTimeSlot, here #1 (first is #0)
 
-    _activeTimeInMs = sc.activeTimeInMs;
-    _sleepTimeInMs = sc.sleepTimeInMs;
-    _totalTalkSlots = sc.totalTalkSlots;
+    _activeTimeInMs = sc._activeTimeInMs;
+    _sleepTimeInMs = sc._sleepTimeInMs;
+    _totalTalkSlots = sc._totalTalkSlots;
 
     _talkTimeSlot = talkTimeSlot;
 }

@@ -4,9 +4,15 @@
 
 class SchedulerConfiguration {
 public:
-    int activeTimeInMs = 100;
-    int sleepTimeInMs = 50;
-    int totalTalkSlots = 10;
+    explicit SchedulerConfiguration(int activeTimeInMs = 100, int sleepTimeInMs = 50, int totalTalkSlots = 10)
+        :_activeTimeInMs(activeTimeInMs),
+        _sleepTimeInMs(sleepTimeInMs),
+        _totalTalkSlots(totalTalkSlots)
+    {}
+
+    int _activeTimeInMs;
+    int _sleepTimeInMs;
+    int _totalTalkSlots;
 };
 
 #endif // SCHEDULERCONFIGURATION_H
