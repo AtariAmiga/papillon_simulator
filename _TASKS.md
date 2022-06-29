@@ -8,13 +8,14 @@
   - DONE: Exchanging-interval and sleeping-interval to reduce power consumption
     - DONE: Example: 5 seconds of exchange, then 10 of sleep
     - DONE: When a node speaks the other should listen!
-      - Talking time-slice during exchanging-interval
-        - Example: during the 5 seconds, 10 talking time slices of 500 ms each
-        - DONE: Cannot know who is around when booting => Start with round-robin algorithm depending on MAC ID: should reduce collision probability
+    - DONE: Cannot know who is around when booting => Start with round-robin algorithm depending on MAC ID: should reduce collision probability
   - Find talk slot automatically 
     - DONE: By listening to other nodes, chose a talking time slice which is different from one of the surrounding nodes (meaning: hop <= 2 for example)
     - v2, improvements
-      - Have the minimum number of nodes to change timeslot
+      - Have the minimum number of nodes to change timeslot. 
+        - In reality, we will turn on a node, then another one. So we can decide that node which joins the network the last should change first
+        - Also, when we turn on a node, it could listen for a few cycles before talking, to find out who is around, by listening to time sync messages
+        - The user could increase the discovery step, by sending a message that would trigger all already installed nodes to repeat it on their talk slot
       - What about the Terminals that can move around? Different range for Terminals & Repeaters? Or fixed slot for Terminals <> from Repeaters?
   - Signal collision when two nodes talk at the same time in the same area
   - Time sync and drift of communication nodes

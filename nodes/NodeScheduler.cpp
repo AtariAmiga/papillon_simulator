@@ -2,6 +2,11 @@
 #include "NodeScheduler.h"
 
 NodeScheduler::NodeScheduler(const SchedulerConfiguration& sc, int talkTimeSlot) {
+    // sleepTime: all nodes go to sleep to save battery
+    // activeTime: time-slices during which nodes may exchange data
+    // talkTime: one the time-slices during which this node will be allowed to emit messages
+    //           to avoid all nodes talking at the same time. It should improve range.
+    //
     //   activeTimeInMs                   sleepTimeInMs
     // ++++++++++++++----------------------------------------------
     // \/\/\/\/\/\/\/ totalTalkSlots, here: 7
