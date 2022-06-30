@@ -12,6 +12,9 @@
   - DONE: Find talk slot automatically 
     - DONE: By listening to other nodes, chose a talking time slice which is different from one of the surrounding nodes (meaning: hop <= 2 for example)
   - Time sync and drift of communication nodes
+    - What algorithm?
+      - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7589954/
+      - https://en.wikipedia.org/wiki/Clock_synchronization
     - How many times per day?
       - By default when a message is transmitted
       - When no message is transmitted?
