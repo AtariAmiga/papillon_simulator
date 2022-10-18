@@ -29,7 +29,7 @@ time_t World::simulateTime(int dtInMs) {
 }
 
 void World::runOneStep() {
-    logger.updateTime(_exactClock.toTime());
+    logger.updateTime(_exactClock.currentTime());
 
     logger << "'" << _name << "' processing:" << std::endl;
     logger.stepIn();
