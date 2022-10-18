@@ -12,7 +12,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream &os, const Clock& c);
 
-    void syncTime(time_t time);
+    void setCurrentTime(time_t time);
 
     time_t currentTime() const;
 

@@ -12,7 +12,7 @@ time_t Clock::updateTime(int dtInMs) {
     return (time_t) _currentTime;
 }
 
-void Clock::syncTime(time_t time) {
+void Clock::setCurrentTime(time_t time) {
     _currentTime = (double) time;
 }
 

@@ -26,7 +26,7 @@ TEST_CASE( "Clock" ) {
     SECTION("syncing time") {
         REQUIRE(168 == clockDriftFuture.updateTime(160));
 
-        clockDriftFuture.syncTime((time_t) 160);
+        clockDriftFuture.setCurrentTime((time_t) 160);
 
         REQUIRE(160 == clockDriftFuture.currentTime());
     }
@@ -40,7 +40,7 @@ TEST_CASE( "Clock" ) {
         Clock e(0, 0.3);
 
         Clock* clocks[] = {&a, &b, &c, &d, &e};
-        for( int t = 1; t < 10; t++ ) {
+        for( int t = 1; t <= 20; t++ ) {
             printf("\n");
             for( Clock* clock: clocks ) {
                 clock->updateTime(1000);
