@@ -30,4 +30,26 @@ TEST_CASE( "Clock" ) {
 
         REQUIRE(160 == clockDriftFuture.currentTime());
     }
+
+    SECTION("syncing between nodes") {
+        // Same as in Clock sync.xls
+        Clock a(0, -0.1);
+        Clock b(0, -0.2);
+        Clock c(0, 0);
+        Clock d(0, 0.2);
+        Clock e(0, 0.3);
+
+        Clock* clocks[] = {&a, &b, &c, &d, &e};
+        for( int t = 1; t < 10; t++ ) {
+            printf("\n");
+            for( Clock* clock: clocks ) {
+                clock->updateTime(1000);
+            }
+
+            printf("%d\t", t);
+            for( Clock* clock: clocks ) {
+                printf("%d ", clock->currentTime());
+            }
+        }
+    }
 }

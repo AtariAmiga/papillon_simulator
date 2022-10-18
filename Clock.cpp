@@ -21,7 +21,7 @@ std::ostream& operator<<(std::ostream &os, const Clock& c) {
 }
 
 time_t Clock::currentTime() const {
-    return (time_t) _currentTime;
+    return (time_t) std::round(_currentTime);
 }
 
 time_t Clock::toTime() const {
